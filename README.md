@@ -19,8 +19,8 @@ A website project for Mobile application development course of **IoT Engineering
 
 Make sure you have all of these following installed before getting started:
 
-- [PHP](https://www.php.net/) >= 8.1
-- [Composer](https://getcomposer.org/)
+- [PHP](https://www.php.net/) >= 8.2
+- [Composer](https://getcomposer.org/download/)
 - [Node.js](https://nodejs.org/) >= 18.x & npm
 - [XAMPP](https://www.apachefriends.org/) (includes Apache + MySQL)
 - [Git](https://git-scm.com/)
@@ -36,22 +36,53 @@ git clone https://github.com/YOUR_USERNAME/IoTe_kmitl_website.git
 cd IoTe_kmitl_website
 ```
 
-### 2. Install PHP Dependencies
+### 2. Install Laravel
+
+Before start, please make sure you all have these following installed in your computer :
+
+- [PHP](https://www.php.net/)
+- [Composer](https://getcomposer.org/download/)
+  If not you can install composer.exe via [Composer](https://getcomposer.org/download/) first then try to :
 
 ```bash
-composer install
+composer global require laravel/installer
 ```
 
 ### 3. Install Node Dependencies
 
 ```bash
-npm install
+npm install & npm build
 ```
 
 ### 4. Install Flowbite
 
+1. install flowbite to your project :
+
 ```bash
 npm install flowbite
+```
+
+2. Import the default theme variables from Flowbite inside your main app.css CSS file:
+
+```bash
+@import "flowbite/src/themes/default";
+```
+
+3. import plugin and configure the source to your css :
+
+```bash
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+```
+
+4. add the flowbite JS to your blade file :
+<body>
+
+```bash
+    @yield('content')
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+</body>
 ```
 
 ### 5. Environment Setup
@@ -68,15 +99,15 @@ php artisan key:generate
 Open the `.env` file and update your database credentials:
 
 ```env
-DB_CONNECTION=ชื่อดาต้าเบส
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=เว้นไว้ก่อน
-DB_USERNAME=เว้นไว้ก่อน
+DB_DATABASE=iote_website
+DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-> ⚠️ Make sure XAMPP is running and you have created a database named `ชื่อดาต้าเบส` in **phpMyAdmin** (`http://localhost/phpmyadmin`).
+> ⚠️ Make sure XAMPP is running and you have created a database named `iote_website` in **phpMyAdmin** (`http://localhost/phpmyadmin`).
 
 ### 7. Run Database Migrations
 
@@ -94,67 +125,40 @@ php artisan db:seed
 
 ## 🚀 Running the Project
 
-You need **two terminal windows** running simultaneously:
-
-**Terminal 1 — Laravel Backend:**
+You need **terminal windows** running:
 
 ```bash
 php artisan serve
 ```
 
-**Terminal 2 — Frontend Assets (Tailwind/Flowbite):**
-
-```bash
-npm run dev
-```
-
-Then open your browser and go to:
-
-```
-http://localhost:8000
-```
-
----
-
 ## 🏗️ Project Structure
 
 ```
-IoTe_kmitl_website/
+IoTe_kmitl_website/IoTe-website
 ├── app/
 │   ├── Http/
-│   │   └── Controllers/     # Application controllers
-│   └── Models/              # Eloquent models
+│   │   └── Controllers/             # Application controllers
+│   │       └── Controller.php
+│   │       └── PageController.php   # Main Application controllers
+│   └── Models/                      # Eloquent models
 ├── database/
-│   ├── migrations/          # Database schema
-│   └── seeders/             # Sample data
+│   ├── migrations/                  # Database schema
+│   └── seeders/                     # Sample data
 ├── resources/
-│   ├── views/               # Blade templates
-│   └── css/                 # Stylesheets (Tailwind)
+│   ├── css/                         # Stylesheets (Tailwind)
+│   │   └── app.css                  # Main app css
+│   │   └── main.css                 # Main app css
+│   ├── js/                          # Javascript
+│   └── view/                        # Main app blaude
+│       ├── laboratories/            # Laboratories blade
+│       ├── layouts/                 # Main layouts of page
+│       └── index.blade.php          # index blade
 ├── routes/
-│   └── web.php              # Web routes
-├── public/                  # Publicly accessible files
-├── .env                     # Environment config (not committed)
+│   └── web.php                      # Web routes
+├── public/                          # Publicly accessible files
+├── .env                             # Environment config (not committed)
 └── README.md
 ```
-
----
-
-## 🔑 Authentication
-
-This project uses **Laravel Breeze** for authentication. If not installed yet, run:
-
-```bash
-composer require laravel/breeze --dev
-php artisan breeze:install
-php artisan migrate
-npm install && npm run dev
-```
-
-Default auth routes available:
-
-- `/login` — Login page
-- `/register` — Register page
-- `/dashboard` — Protected dashboard
 
 ---
 
