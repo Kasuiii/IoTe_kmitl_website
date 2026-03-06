@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\course;
 
 class PageController extends Controller
 {
@@ -34,7 +35,17 @@ class PageController extends Controller
 
     public function syllabus()
     {
-        return view('syllabus');
+        $grouped = course::orderBy('courseYear')
+            ->orderBy('courseSemester')
+            ->orderBy('courseID')
+            ->get()
+            ->groupBy('courseYear')
+            ->map(fn($yearGroup) => $yearGroup->groupBy('courseSemester'));
+        $credits = course::orderBy('courseType')
+            ->get()
+            ->groupBy('courseType')
+            ->map(fn($typeGroup) => $typeGroup->sum('courseCredit'));
+        return view('syllabus', compact('grouped'), compact('credits'));
     }
 
     public function faculty()
@@ -42,6 +53,15 @@ class PageController extends Controller
         return view('faculty');
     }
 
+    public function addCourse()
+    {
+        return view('add_course');
+    }
+
+    public function test()
+    {
+        return view('test');
+    }
     // ─── Lab Data ────────────────────────────────────────────────────────────
 
     private function getLabsData(): array

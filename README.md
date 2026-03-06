@@ -33,7 +33,7 @@ Make sure you have all of these following installed before getting started:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/IoTe_kmitl_website.git
-cd IoTe_kmitl_website
+cd IoTe_kmitl_website/IoTe-website
 ```
 
 ### 2. Install Laravel
