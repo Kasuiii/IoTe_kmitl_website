@@ -10,6 +10,6 @@ class randomCourseSeeder extends Seeder
 {
     public function run(): void
     {
-        Course::factory()->count(30)->create(); //using coursefactory from courseFactory.php
+        Course::factory()->count(10)->create(); //using coursefactory from courseFactory.php
     }
 }
