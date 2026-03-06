@@ -8,27 +8,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
+    <style>    
         :root {
-            --crimson: #720A00;
-            --orange:  #E35205;
-            --dark:    #1A1A1A;
-            --light:   #F8F3F0;
-            --muted:   #6B6360;
-            --border:  #E2D8D5;
+            --crimson: #720a00;
+            --orange: #e35205;
+            --dark: #1a1a1a;
+            --light: #f8f3f0;
+            --muted: #6b6360;
+            --border: #e2d8d5;
         }
-        * { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, .display { font-family: 'Playfair Display', serif; }
+        * {
+            font-family: "DM Sans", sans-serif;
+        }
+        h1,
+        h2,
+        h3,
+        .display {
+            font-family: "Playfair Display", serif;
+        }
 
         /* Navbar */
         #main-navbar {
-            background: rgba(255,255,255,0.96);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             transition: box-shadow 0.3s;
         }
-        #main-navbar.scrolled { box-shadow: 0 4px 24px rgba(114,10,0,0.08); }
+        #main-navbar.scrolled {
+            box-shadow: 0 4px 24px rgba(114, 10, 0, 0.08);
+        }
         .nav-link {
             color: var(--dark);
             font-weight: 500;
@@ -36,12 +46,15 @@
             letter-spacing: 0.02em;
             padding: 0.5rem 0.75rem;
             border-radius: 6px;
-            transition: color 0.2s, background 0.2s;
+            transition:
+                color 0.2s,
+                background 0.2s;
             text-decoration: none;
         }
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover,
+        .nav-link.active {
             color: var(--crimson);
-            background: rgba(114,10,0,0.06);
+            background: rgba(114, 10, 0, 0.06);
         }
         .nav-cta {
             background: var(--crimson);
@@ -50,7 +63,9 @@
             font-size: 0.875rem;
             padding: 0.5rem 1.25rem;
             border-radius: 6px;
-            transition: background 0.2s, transform 0.15s;
+            transition:
+                background 0.2s,
+                transform 0.15s;
             text-decoration: none;
         }
         .nav-cta:hover {
@@ -66,10 +81,15 @@
             font-weight: 600;
             padding: 0.75rem 2rem;
             border-radius: 6px;
-            transition: background 0.2s, transform 0.15s;
+            transition:
+                background 0.2s,
+                transform 0.15s;
             text-decoration: none;
         }
-        .btn-primary:hover { background: #8B0D00; transform: translateY(-2px); }
+        .btn-primary:hover {
+            background: #8b0d00;
+            transform: translateY(-2px);
+        }
         .btn-outline {
             display: inline-block;
             border: 2px solid var(--crimson);
@@ -80,7 +100,10 @@
             transition: all 0.2s;
             text-decoration: none;
         }
-        .btn-outline:hover { background: var(--crimson); color: #fff; }
+        .btn-outline:hover {
+            background: var(--crimson);
+            color: #fff;
+        }
 
         /* Section */
         .section-label {
@@ -93,13 +116,17 @@
             margin-bottom: 0.75rem;
         }
         .section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: "Playfair Display", serif;
             font-size: 2.25rem;
             font-weight: 900;
             color: var(--dark);
             line-height: 1.2;
         }
-        @media (min-width: 768px) { .section-title { font-size: 2.75rem; } }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 2.75rem;
+            }
+        }
 
         /* Card */
         .card {
@@ -107,14 +134,19 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
-            transition: box-shadow 0.25s, transform 0.25s;
+            transition:
+                box-shadow 0.25s,
+                transform 0.25s;
         }
-        .card:hover { box-shadow: 0 12px 36px rgba(114,10,0,0.10); transform: translateY(-4px); }
+        .card:hover {
+            box-shadow: 0 12px 36px rgba(114, 10, 0, 0.1);
+            transform: translateY(-4px);
+        }
 
         /* Tag */
         .tag {
             display: inline-block;
-            background: rgba(227,82,5,0.1);
+            background: rgba(227, 82, 5, 0.1);
             color: var(--orange);
             font-size: 0.75rem;
             font-weight: 600;
@@ -126,7 +158,8 @@
 
         /* Divider accent */
         .accent-line {
-            width: 56px; height: 4px;
+            width: 56px;
+            height: 4px;
             background: linear-gradient(90deg, var(--crimson), var(--orange));
             border-radius: 2px;
             margin-bottom: 1.5rem;
