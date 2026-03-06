@@ -46,7 +46,10 @@ Before start, please make sure you all have these following installed in your co
 
 ```bash
 composer global require laravel/installer
+composer install
 ```
+
+if you can't use composer try check system envarioments, If there is php path existed.
 
 ### 3. Install Node Dependencies
 
@@ -54,38 +57,7 @@ composer global require laravel/installer
 npm install & npm build
 ```
 
-### 4. Install Flowbite
-
-1. install flowbite to your project :
-
-```bash
-npm install flowbite
-```
-
-2. Import the default theme variables from Flowbite inside your main app.css CSS file:
-
-```bash
-@import "flowbite/src/themes/default";
-```
-
-3. import plugin and configure the source to your css :
-
-```bash
-@plugin "flowbite/plugin";
-@source "../../node_modules/flowbite";
-```
-
-4. add the flowbite JS to your blade file :
-<body>
-
-```bash
-    @yield('content')
-
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-</body>
-```
-
-### 5. Environment Setup
+### 4. Environment Setup
 
 Copy the example environment file and generate an app key:
 
@@ -94,7 +66,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 6. Configure Database
+### 5. Configure Database
 
 Open the `.env` file and update your database credentials:
 
@@ -109,13 +81,13 @@ DB_PASSWORD=
 
 > ⚠️ Make sure XAMPP is running and you have created a database named `iote_website` in **phpMyAdmin** (`http://localhost/phpmyadmin`).
 
-### 7. Run Database Migrations
+### 6. Run Database Migrations
 
 ```bash
 php artisan migrate
 ```
 
-### 8. (ไม่ต้องทำจ้า ทำทันเดะทำ) Seed the Database
+### 7. Seed the Database
 
 ```bash
 php artisan db:seed
@@ -140,8 +112,11 @@ IoTe_kmitl_website/IoTe-website
 │   │   └── Controllers/             # Application controllers
 │   │       └── Controller.php
 │   │       └── PageController.php   # Main Application controllers
+│   │       └── FormController.php   # Form controllers of crud system for course
 │   └── Models/                      # Eloquent models
+│       └── course.php               # Main model course
 ├── database/
+│   ├── factories                    # Factory to create dump data
 │   ├── migrations/                  # Database schema
 │   └── seeders/                     # Sample data
 ├── resources/
@@ -150,6 +125,7 @@ IoTe_kmitl_website/IoTe-website
 │   │   └── main.css                 # Main app css
 │   ├── js/                          # Javascript
 │   └── view/                        # Main app blaude
+│       ├── courses/                         # Course blaude
 │       ├── laboratories/            # Laboratories blade
 │       ├── layouts/                 # Main layouts of page
 │       └── index.blade.php          # index blade
