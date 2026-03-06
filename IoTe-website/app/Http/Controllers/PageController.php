@@ -58,9 +58,14 @@ class PageController extends Controller
         return view('add_course');
     }
 
-    public function test()
+    // public function test_contact()
+    // {
+    //     return view('test_contact');
+    // }
+
+    public function contacts()
     {
-        return view('test');
+        return view('contacts');
     }
     // ─── Lab Data ────────────────────────────────────────────────────────────
 
