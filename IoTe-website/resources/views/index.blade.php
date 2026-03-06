@@ -458,7 +458,7 @@
                         @endforeach
                         </div>
                     --}}
-                    <a href="https://www.iote.kmitl.ac.th/about-iote/" target="_blank" class="btn-outline">Read More About IoTE ↗</a>
+                    <a href="{{ route('about_us') }}" target="_blank" class="btn-outline">Read More About IoTE ↗</a>
                 </div>
                 <div class="gallery-grid">
                     <div class="gallery-item">

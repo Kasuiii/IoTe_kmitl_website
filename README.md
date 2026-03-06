@@ -56,7 +56,7 @@ if you can't use composer try check system envarioments, If there is php path ex
 please check if your device already have node.js installed
 
 ```bash
-npm install & npm build
+npm install & npm run build
 ```
 
 ### 4. Environment Setup
@@ -86,7 +86,7 @@ DB_PASSWORD=
 ### 6. Run Database Migrations
 
 ```bash
-php artisan migrate
+php artisan migrate:fresh
 ```
 
 ### 7. Seed the Database

@@ -110,7 +110,7 @@
 
             <div class="mb-4 flex items-center gap-4">
                 <div
-                    class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl text-xl font-black"
+                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-xl font-black"
                     style="background: var(--crimson); font-family: 'Playfair Display', serif; color: #fff"
                 >
                     {{ $lab['number'] }}
