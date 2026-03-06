@@ -32,7 +32,7 @@ Make sure you have all of these following installed before getting started:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/IoTe_kmitl_website.git
+git clone https://github.com/Kasuiii/IoTe_kmitl_website.git
 cd IoTe_kmitl_website/IoTe-website
 ```
 
@@ -49,9 +49,11 @@ composer global require laravel/installer
 composer install
 ```
 
-if you can't use composer try check system envarioments, If there is php path existed.
+if you can't use composer try check system envarioments, If there is php path existed. and also check php.ini in C:\xampp\php file if there is ;extension=zip. please change to extension=zip
 
 ### 3. Install Node Dependencies
+
+please check if your device already have node.js installed
 
 ```bash
 npm install & npm build

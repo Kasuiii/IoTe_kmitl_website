@@ -11,7 +11,9 @@ Route::get('/laboratories/{id}', [PageController::class, 'laboratoriesShow'])->n
 Route::get('/admission', [PageController::class, 'admission'])->name('admission');
 Route::get('/syllabus', [PageController::class, 'syllabus'])->name('syllabus');
 Route::get('/faculty', [PageController::class, 'faculty'])->name('faculty');
-Route::get('/test', [PageController::class, 'test'])->name('test');
+// Route::get('/test_contact', [PageController::class, 'test_contact'])->name('test_contact');
+Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
+
 // Form Routes
 Route::get('/courses/course_list', [FormController::class, 'index'])->name('course.index');
 Route::get('/add_course', [FormController::class, 'create'])->name('course.create');
