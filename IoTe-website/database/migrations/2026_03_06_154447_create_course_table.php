@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('courseType', 50);
             $table->text('courseDescript')->nullable();
             $table->integer('courseSemester');
+            $table->string('courseDegree', 255);
         });
     }
 

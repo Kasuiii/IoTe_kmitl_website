@@ -150,18 +150,18 @@
     </div>
 
     <!-- LAB OVERVIEW INTRO -->
-    <section style="padding: 5rem 0; background: #fff">
+    <section style="padding: 4rem 0; background: #fff">
         <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
             <span class="section-label">World-Class Facilities</span>
             <h2 class="section-title">Explore Our Labs</h2>
-            <div class="accent-line mx-auto mt-4"></div>
-            <p class="mx-auto mt-4 max-w-2xl text-lg" style="color: var(--muted)">
+            <div class="accent-line mx-auto mt-2"></div>
+            <p class="mx-auto mb-5 max-w-2xl text-lg" style="color: var(--muted)">
                 Each laboratory is equipped with industry-grade hardware and software to support cutting-edge research and hands-on student
                 learning.
             </p>
 
             <!-- Feature highlights -->
-            <div class="mt-12 grid grid-cols-2 gap-6 text-left md:grid-cols-4">
+            <div class="mt-15 grid grid-cols-2 gap-6 text-left md:grid-cols-4">
                 @foreach ([
                         ['icon' => '🔬', 'title' => 'Industry-Grade Equipment', 'desc' => 'Funded by leading technology partners'],
                         ['icon' => '🤝', 'title' => 'Open to Students', 'desc' => 'Access all year round for projects'],

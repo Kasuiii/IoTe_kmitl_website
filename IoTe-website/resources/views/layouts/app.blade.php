@@ -172,27 +172,27 @@
     </head>
     <body class="bg-white" style="color: var(--dark)">
         <!-- NAVBAR -->
-        <nav id="main-navbar" class="fixed top-0 z-50 w-full">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 items-center justify-between">
+        <nav id="main-navbar" class="top-0 fixed z-50 w-full">
+            <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+                <div class="h-16 flex items-center justify-between">
                     <!-- Logo -->
-                    <a href="{{ route('home') }}" class="flex items-center gap-3">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-lg" style="background: var(--crimson)">
+                    <a href="{{ route('home') }}" class="gap-3 flex items-center">
+                        <div class="h-9 w-9 rounded-lg flex items-center justify-center" style="background: var(--crimson)">
                             <span class="text-sm font-bold text-white" style="font-family: 'Playfair Display', serif">Io</span>
                         </div>
                         <div>
                             <span
-                                class="block text-base leading-none font-bold"
+                                class="text-base font-bold block leading-none"
                                 style="color: var(--crimson); font-family: 'Playfair Display', serif"
                             >
                                 IoTe
                             </span>
-                            <span class="text-xs leading-none font-medium" style="color: var(--muted)">KMITL</span>
+                            <span class="text-xs font-medium leading-none" style="color: var(--muted)">KMITL</span>
                         </div>
                     </a>
 
                     <!-- Desktop Nav -->
-                    <div class="hidden sm:flex sm:items-center sm:gap-6">
+                    <div class="sm:flex sm:items-center sm:gap-6 hidden">
                         <div class="md:flex md:items-center md:gap-1">
                             <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                             <a
@@ -211,11 +211,29 @@
                                 Faculty
                             </a>
 
-                            <a href="{{ route('contacts') }}" class="nav-link {{ request()->routeIs('contacts') ? 'active' : '' }}">
+                            <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">
                                 Contact
                             </a>
+
+                            @if (Auth::check())
+                                <a href="{{ route('dashboard') }}" class="nav-link">
+                                    @if (Auth::user()->avatar)
+                                        <img
+                                            src="{{ Auth::user()->avatar }}"
+                                            width="36"
+                                            height="36"
+                                            style="border-radius: 50%"
+                                            alt="Profile"
+                                        />
+                                    @endif
+                                </a>
+                            @else
+                                <a href="{{ route('login') }}" class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}">
+                                    Login
+                                </a>
+                            @endif
                         </div>
-                        <a href="{{ route('admission') }}" class="nav-cta hidden md:inline-block">Apply Now</a>
+                        <a href="{{ route('admission') }}" class="nav-cta md:inline-block hidden">Apply Now</a>
                     </div>
 
                     <!-- Mobile Toggle -->
@@ -228,15 +246,15 @@
             </div>
 
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden space-y-1 border-t bg-white px-4 py-3 md:hidden" style="border-color: var(--border)">
+            <div id="mobile-menu" class="space-y-1 bg-white px-4 py-3 md:hidden hidden border-t" style="border-color: var(--border)">
                 <a href="{{ route('home') }}" class="nav-link block w-full">Home</a>
                 <a href="{{ route('laboratories.index') }}" class="nav-link block w-full">Laboratories</a>
                 <a href="{{ route('admission') }}" class="nav-link block w-full">Admission</a>
                 <a href="{{ route('syllabus') }}" class="nav-link block w-full">Syllabus</a>
                 <a href="{{ route('faculty') }}" class="nav-link block w-full">Faculty</a>
 
-                <a href="{{ route('contacts') }}" class="nav-link block w-full">Contact</a>
-
+                <a href="{{ route('contact') }}" class="nav-link block w-full">Contact</a>
+                <a href="{{ route('login') }} " class="nav-link block w-full">Login</a>
                 <a href="{{ route('admission') }}" class="nav-cta mt-2 block text-center">Apply Now</a>
             </div>
         </nav>
@@ -248,11 +266,11 @@
 
         <!-- FOOTER -->
         <footer style="background: var(--dark); color: #fff" class="mt-24">
-            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
+            <div class="max-w-7xl px-4 py-16 sm:px-6 lg:px-8 mx-auto">
+                <div class="gap-10 md:grid-cols-4 grid grid-cols-1">
                     <div class="md:col-span-2">
-                        <div class="mb-4 flex items-center gap-3">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-lg" style="background: var(--crimson)">
+                        <div class="mb-4 gap-3 flex items-center">
+                            <div class="h-10 w-10 rounded-lg flex items-center justify-center" style="background: var(--crimson)">
                                 <span class="font-bold text-white" style="font-family: 'Playfair Display', serif">Io</span>
                             </div>
                             <span class="text-xl font-bold" style="font-family: 'Playfair Display', serif">IoTe KMITL</span>
@@ -260,10 +278,10 @@
                         <p class="mb-4 text-sm leading-relaxed" style="color: #a8a0a0; max-width: 320px">
                             Internet of Things Engineering at King Mongkut's Institute of Technology Ladkrabang
                         </p>
-                        <div class="flex gap-3">
+                        <div class="gap-3 flex">
                             <a
                                 href="https://www.facebook.com/IOTE.KMITL"
-                                class="flex h-9 w-9 items-center justify-center rounded-lg transition-colors"
+                                class="h-9 w-9 rounded-lg flex items-center justify-center transition-colors"
                                 style="background: rgba(255, 255, 255, 0.08)"
                                 onmouseover="this.style.background = 'var(--crimson)'"
                                 onmouseout="this.style.background = 'rgba(255,255,255,0.08)'"
@@ -276,7 +294,7 @@
                             </a>
                             <a
                                 href="https://www.instagram.com/kmitl.iote.official/"
-                                class="flex h-9 w-9 items-center justify-center rounded-lg transition-colors"
+                                class="h-9 w-9 rounded-lg flex items-center justify-center transition-colors"
                                 style="background: rgba(255, 255, 255, 0.08)"
                                 onmouseover="this.style.background = 'var(--crimson)'"
                                 onmouseout="this.style.background = 'rgba(255,255,255,0.08)'"
@@ -292,13 +310,13 @@
                     <div>
                         <h4 class="mb-4 text-sm font-semibold tracking-wider uppercase" style="color: var(--orange)">Navigation</h4>
                         <ul class="space-y-2 text-sm" style="color: #a8a0a0">
-                            <li><a href="{{ route('home') }}" class="transition-colors hover:text-white">Home</a></li>
+                            <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a></li>
                             <li>
-                                <a href="{{ route('laboratories.index') }}" class="transition-colors hover:text-white">Laboratories</a>
+                                <a href="{{ route('laboratories.index') }}" class="hover:text-white transition-colors">Laboratories</a>
                             </li>
-                            <li><a href="{{ route('admission') }}" class="transition-colors hover:text-white">Admission</a></li>
-                            <li><a href="{{ route('syllabus') }}" class="transition-colors hover:text-white">Syllabus</a></li>
-                            <li><a href="{{ route('faculty') }}" class="transition-colors hover:text-white">Faculty</a></li>
+                            <li><a href="{{ route('admission') }}" class="hover:text-white transition-colors">Admission</a></li>
+                            <li><a href="{{ route('syllabus') }}" class="hover:text-white transition-colors">Syllabus</a></li>
+                            <li><a href="{{ route('faculty') }}" class="hover:text-white transition-colors">Faculty</a></li>
                         </ul>
                     </div>
                     <div>
@@ -307,14 +325,14 @@
                             <li>KMITL, Ladkrabang</li>
                             <li>Bangkok 10520, Thailand</li>
                             <li class="mt-3">
-                                <a href="mailto:iote@kmitl.ac.th" class="transition-colors hover:text-white">iote@kmitl.ac.th</a>
+                                <a href="mailto:iote@kmitl.ac.th" class="hover:text-white transition-colors">iote@kmitl.ac.th</a>
                             </li>
-                            <li><a href="tel:+6623298000" class="transition-colors hover:text-white">+66 2 329 8000</a></li>
+                            <li><a href="tel:+6623298000" class="hover:text-white transition-colors">+66 2 329 8000</a></li>
                         </ul>
                     </div>
                 </div>
                 <div
-                    class="mt-12 flex flex-col items-center justify-between gap-4 pt-8 text-sm md:flex-row"
+                    class="mt-12 gap-4 pt-8 text-sm md:flex-row flex flex-col items-center justify-between"
                     style="border-top: 1px solid rgba(255, 255, 255, 0.1); color: #a8a0a0"
                 >
                     <p>© {{ date('Y') }} IoTe KMITL. All rights reserved.</p>

@@ -2,80 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\course;
+use App\Models\Course; // ← capital C (PSR-4 standard)
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
-    public function create()
-    {
-        return view('test');
-    }
-
-    //view
+    // Show course list
     public function index()
     {
-        $courses = course::all();
-        return view('courses/course_list', compact('courses')); //pass data as array
+        $courses = Course::orderBy('courseYear', 'desc')
+            ->orderBy('courseID', 'asc')
+            ->get();
+
+        return view('courses.index', compact('courses'));
     }
 
-    //create
+    // Show add form
+    public function create()
+    {
+        return view('courses.add_course');
+    }
+
+    // Save new course
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'courseYear' => 'required|integer',
-            'courseID' => 'required|string|max:20',
-            'courseName' => 'required|string|max:255',
-            'courseCredit' => 'required|integer',
-            'courseType' => 'required|string|max:50',
-            'courseDescript' => 'nullable|string',
-            'courseSemester' => 'required|string|max:10'
+        $validated = $request->validate([
+            'courseYear'     => 'required|integer|min:1|max:4',
+            'courseID'       => 'required|string|max:20|unique:course,courseID', // unique check
+            'courseName'     => 'required|string|max:255',
+            'courseCredit'   => 'required|integer|min:1|max:3',
+            'courseType'     => 'required|string|max:50',
+            'courseDescript' => 'nullable|string|max:500',
+            'courseSemester' => 'required|string|min:1|max:3',
+            'courseDegree'   => 'required|string|max:255',
         ]);
 
-        course::create([
-            'courseYear' => $validatedData['courseYear'],
-            'courseID' => $validatedData['courseID'],
-            'courseName' => $validatedData['courseName'],
-            'courseCredit' => $validatedData['courseCredit'],
-            'courseType' => $validatedData['courseType'],
-            'courseDescript' => $validatedData['courseDescript'] ?? null,
-            'courseSemester' => $validatedData['courseSemester']
-        ]);
+        Course::create($validated);
 
-        return redirect('/courses/course_list')->with('success', 'Course added successfully!');
+        return redirect()->route('course.index')
+            ->with('success', 'Course added successfully!');
     }
 
-    //edit
+    // Show edit form
     public function edit($courseID)
     {
-        $course = course::findOrFail($courseID);
-        return view('courses/edit_course', compact('course'));
+        $course = Course::findOrFail($courseID);
+        return view('courses.edit_course', compact('course'));
     }
 
-    //update
+    // Update course
     public function update(Request $request, $courseID)
     {
-        $validatedData = $request->validate([
-            'courseYear' => 'required|integer',
-            'courseName' => 'required|string|max:255',
-            'courseCredit' => 'required|integer',
-            'courseType' => 'required|string|max:50',
-            'courseDescript' => 'nullable|string',
-            'courseSemester' => 'required|string|max:10'
+        $validated = $request->validate([
+            'courseYear'     => 'required|integer|min:2000|max:2100',
+            'courseName'     => 'required|string|max:255',
+            'courseCredit'   => 'required|integer|min:0|max:20',
+            'courseType'     => 'required|string|max:50',
+            'courseDescript' => 'nullable|string|max:500',
+            'courseSemester' => 'required|string|max:10',
+            'courseDegree'   => 'required|string|max:255',
         ]);
 
-        $course = course::findOrFail($courseID);
-        $course->update($validatedData);
+        $course = Course::findOrFail($courseID);
+        $course->update($validated);
 
-        return redirect('/courses/course_list')->with('success', 'Course updated successfully!');
+        return redirect()->route('course.index')
+            ->with('success', 'Course updated successfully!');
     }
 
-    //delete
+    // Delete course
     public function destroy($courseID)
     {
-        $course = course::findOrFail($courseID);
+        $course = Course::findOrFail($courseID);
         $course->delete();
-        return redirect('/courses/course_list')->with('success', 'Course deleted successfully!');
+
+        return redirect()->route('course.index')
+            ->with('success', 'Course deleted successfully!');
     }
 }

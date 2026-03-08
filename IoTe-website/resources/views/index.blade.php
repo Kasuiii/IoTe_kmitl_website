@@ -286,7 +286,7 @@
                     Engineering
                 </h1>
                 <p>IoT engineers at King Mongkut's Institute of Technology Ladkrabang.</p>
-                <div class="hero-btns flex flex-wrap justify-center gap-4">
+                <div class="hero-btns gap-4 flex flex-wrap justify-center">
                     <a href="{{ route('admission') }}" class="btn-primary">รับสมัครนักศึกษา 2569</a>
                     <a
                         href="{{ route('faculty') }}"
@@ -322,7 +322,7 @@
                     <em style="color: #ffaa77">Madara Uchiha</em>
                 </h1>
                 <p>From ninja to IoT engineer.</p>
-                <div class="hero-btns flex flex-wrap justify-center gap-4">
+                <div class="hero-btns gap-4 flex flex-wrap justify-center">
                     <a href="{{ route('syllabus') }}" class="btn-primary">View Curriculum</a>
                     <a
                         href="{{ route('laboratories.index') }}"
@@ -358,7 +358,7 @@
                     <em style="color: #ffaa77">ติ๋ม</em>
                 </h1>
                 <p>PhysIoT เท่ ๆ</p>
-                <div class="hero-btns flex flex-wrap justify-center gap-4">
+                <div class="hero-btns gap-4 flex flex-wrap justify-center">
                     <a href="{{ route('admission') }}" class="btn-primary">How to Apply</a>
                     <a
                         href="#programs"
@@ -399,8 +399,8 @@
 
     <!-- STATS BAR -->
     <section style="background: var(--dark); padding: 4rem 0">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+            <div class="gap-6 md:grid-cols-4 grid grid-cols-2">
                 <div class="stat-card">
                     <div class="mb-1 text-4xl font-black" style="font-family: 'Playfair Display', serif">95</div>
                     <div class="text-sm font-medium opacity-80">Seats Per Year</div>
@@ -423,8 +423,8 @@
 
     <!-- ABOUT SECTION -->
     <section style="padding: 6rem 0; background: var(--light)">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+            <div class="gap-16 lg:grid-cols-2 grid grid-cols-1 items-center">
                 <div>
                     <span class="section-label">เกี่ยวกับเรา · About IoTE</span>
                     <h2 class="section-title">
@@ -458,7 +458,7 @@
                         @endforeach
                         </div>
                     --}}
-                    <a href="{{ route('about_us') }}" target="_blank" class="btn-outline">Read More About IoTE ↗</a>
+                    <a href="#" target="_blank" class="btn-outline">Read More About IoTE ↗</a>
                 </div>
                 <div class="gallery-grid">
                     <div class="gallery-item">
@@ -483,13 +483,13 @@
 
     <!-- PROGRAMMES -->
     <section id="programs" style="padding: 6rem 0; background: #fff">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="mb-14 text-center">
                 <span class="section-label">Academics · หลักสูตรที่เปิดสอน</span>
                 <h2 class="section-title">Our Degree Programmes</h2>
-                <div class="accent-line mx-auto mt-4"></div>
+                <div class="accent-line mt-4 mx-auto"></div>
             </div>
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div class="gap-8 md:grid-cols-2 grid grid-cols-1">
                 <div class="program-card">
                     <div class="program-card-top">
                         <div style="font-size: 2.5rem; margin-bottom: 0.75rem">🎓</div>
@@ -517,18 +517,18 @@
                         </h3>
                         <p style="font-size: 0.875rem; opacity: 0.85">วศ.บ. วิศวกรรมระบบไอโอทีและสารสนเทศ</p>
                     </div>
-                    <div class="flex flex-1 flex-col p-6">
+                    <div class="p-6 flex flex-1 flex-col">
                         <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
                             หลักสูตร 4 ปี บูรณาการความรู้ด้านซอฟต์แวร์ ฮาร์ดแวร์ IoT การสื่อสาร และปัญญาประดิษฐ์
                             เพื่อผลิตวิศวกรพร้อมทำงานในอุตสาหกรรมยุคดิจิทัล 4.0
                         </p>
-                        <div class="mb-4 flex flex-wrap gap-2">
+                        <div class="mb-4 gap-2 flex flex-wrap">
                             @foreach (['IoT Systems', 'Embedded', 'Software Dev', 'Data Science', 'Cybersecurity'] as $tag)
                                 <span class="tag" style="font-size: 0.75rem">{{ $tag }}</span>
                             @endforeach
                         </div>
-                        <div class="mt-auto border-t pt-4" style="border-color: var(--border)">
-                            <div class="flex justify-between text-sm">
+                        <div class="pt-4 mt-auto border-t" style="border-color: var(--border)">
+                            <div class="text-sm flex justify-between">
                                 <span style="color: var(--muted)">
                                     Duration:
                                     <strong style="color: var(--dark)">4 Years</strong>
@@ -569,18 +569,18 @@
                         </h3>
                         <p style="font-size: 0.875rem; opacity: 0.85">วศ.บ. IoT + วท.บ. ฟิสิกส์อุตสาหกรรม — "PhysIoT"</p>
                     </div>
-                    <div class="flex flex-1 flex-col p-6">
+                    <div class="p-6 flex flex-1 flex-col">
                         <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
                             โครงการ "PhysIoT" — ครั้งแรกในประเทศไทย! เรียน 4 ปี ได้ 2 ปริญญา
                             ทลายกำแพงระหว่างคณะวิศวกรรมศาสตร์และคณะวิทยาศาสตร์ สจล.
                         </p>
-                        <div class="mb-4 flex flex-wrap gap-2">
+                        <div class="mb-4 gap-2 flex flex-wrap">
                             @foreach (['2 Degrees / 4 Years', 'Smart Sensors', 'Physics + IoT', 'Innovation'] as $tag)
                                 <span class="tag" style="font-size: 0.75rem">{{ $tag }}</span>
                             @endforeach
                         </div>
-                        <div class="mt-auto border-t pt-4" style="border-color: var(--border)">
-                            <div class="flex justify-between text-sm">
+                        <div class="pt-4 mt-auto border-t" style="border-color: var(--border)">
+                            <div class="text-sm flex justify-between">
                                 <span style="color: var(--muted)">
                                     Duration:
                                     <strong style="color: var(--dark)">4 Years</strong>
@@ -618,16 +618,16 @@
                         </h3>
                         <p style="font-size: 0.875rem; opacity: 0.85">วศ.บ. วิศวกรรมคอมพิวเตอร์และไอโอที (ต่อเนื่อง)</p>
                     </div>
-                    <div class="flex flex-1 flex-col p-6">
+                    <div class="p-6 flex flex-1 flex-col">
                         <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
                             สำหรับผู้จบ ปวส. สายช่างหรือคอมพิวเตอร์ ต่อยอดการศึกษาสู่ปริญญาตรีในสาขาวิศวกรรมคอมพิวเตอร์และไอโอที
                         </p>
-                        <div class="mb-4 flex flex-wrap gap-2">
+                        <div class="mb-4 gap-2 flex flex-wrap">
                             @foreach (['ปวส. → ปริญญาตรี', 'Computer Eng', 'IoT', 'Continuing'] as $tag)
                                 <span class="tag" style="font-size: 0.75rem">{{ $tag }}</span>
                             @endforeach
                         </div>
-                        <div class="mt-auto border-t pt-4" style="border-color: var(--border)">
+                        <div class="pt-4 mt-auto border-t" style="border-color: var(--border)">
                             <span style="color: var(--muted); font-size: 0.875rem">
                                 For:
                                 <strong style="color: var(--dark)">ปวส. graduates</strong>
@@ -663,16 +663,16 @@
                         </h3>
                         <p style="font-size: 0.875rem; opacity: 0.85">วศ.ม. และ ปร.ด. วิศวกรรมเอไอโอทีและสารสนเทศ</p>
                     </div>
-                    <div class="flex flex-1 flex-col p-6">
+                    <div class="p-6 flex flex-1 flex-col">
                         <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
                             หลักสูตรปริญญาโทและปริญญาเอกด้าน AIoT (AI + IoT) สำหรับผู้ต้องการต่อยอดการวิจัยและนวัตกรรมในระดับสูง
                         </p>
-                        <div class="mb-4 flex flex-wrap gap-2">
+                        <div class="mb-4 gap-2 flex flex-wrap">
                             @foreach (['M.Eng', 'Ph.D', 'AIoT', 'Research', 'Innovation'] as $tag)
                                 <span class="tag" style="font-size: 0.75rem">{{ $tag }}</span>
                             @endforeach
                         </div>
-                        <div class="mt-auto border-t pt-4" style="border-color: var(--border)">
+                        <div class="pt-4 mt-auto border-t" style="border-color: var(--border)">
                             <span style="color: var(--muted); font-size: 0.875rem">
                                 Graduate Level
                                 <strong style="color: var(--crimson)">Research Programme</strong>
@@ -686,7 +686,7 @@
 
     <!-- ═══ STUDENT PROJECTS ═══ -->
     <section style="padding: 6rem 0; background: var(--light)">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="mb-14 text-center">
                 <span class="section-label">MORE FROM THE IoT COMMUNITY · ผลงานนักศึกษา</span>
                 <h2 class="section-title">
@@ -694,9 +694,9 @@
                     <br />
                     <em style="color: var(--crimson)">Innovations</em>
                 </h2>
-                <div class="accent-line mx-auto mt-4"></div>
+                <div class="accent-line mt-4 mx-auto"></div>
             </div>
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div class="gap-6 md:grid-cols-2 lg:grid-cols-4 grid grid-cols-1">
                 @php
                     $projects = [
                         ['img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/4.jpg', 'title' => 'Measurement Multimeter', 'desc' => 'อุปกรณ์วัดค่าที่สามารถวัดได้หลากหลาย ตั้งแต่อุณหภูมิไปจนถึงปริมาณแก๊ส LPG ในรูปแบบที่ไม่เหมือนใคร', 'tag' => 'Smart Sensors', 'url' => 'https://www.iote.kmitl.ac.th/measurement-multimeter/'],
@@ -732,8 +732,8 @@
 
     <!-- ═══ CAREER PATHS ═══ -->
     <section style="padding: 6rem 0; background: #fff">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+            <div class="gap-16 lg:grid-cols-2 grid grid-cols-1 items-center">
                 <div>
                     <span class="section-label">After Graduation · อาชีพหลังจบ</span>
                     <h2 class="section-title">
@@ -746,13 +746,13 @@
                         บัณฑิตจากหลักสูตรวิศวกรรมระบบไอโอทีและสารสนเทศสามารถประกอบอาชีพได้หลากหลายในอุตสาหกรรมดิจิทัล
                         ซึ่งรัฐบาลให้การสนับสนุนและมีความต้องการสูงอย่างต่อเนื่อง
                     </p>
-                    <div class="flex flex-wrap gap-3">
+                    <div class="gap-3 flex flex-wrap">
                         @foreach (['IoT Engineer', 'Information System Engineer', 'Embedded System Engineer', 'Embedded Software Engineer', 'Application Developer', 'Programmer', 'Software Engineer', 'Front End Developer', 'Back End Developer', 'Full Stack Developer', 'Cloud Engineer', 'Network Engineer', 'Data Scientist', 'Data Engineer', 'System Administrator', 'Cybersecurity Specialist', 'นักวิจัย / Researcher', 'เจ้าของธุรกิจ Startup'] as $career)
                             <span class="career-tag">{{ $career }}</span>
                         @endforeach
                     </div>
                 </div>
-                <div class="overflow-hidden rounded-2xl" style="box-shadow: 0 20px 60px rgba(114, 10, 0, 0.15)">
+                <div class="rounded-2xl overflow-hidden" style="box-shadow: 0 20px 60px rgba(114, 10, 0, 0.15)">
                     <img
                         src="http://www.iote.kmitl.ac.th/wp-content/uploads/2024/02/cropped-2.jpg"
                         alt="IoTe Graduate Careers"
@@ -767,13 +767,13 @@
 
     <!-- ═══ KEY HIGHLIGHTS ═══ -->
     <section style="padding: 6rem 0; background: var(--light)">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="mb-14 text-center">
                 <span class="section-label">Why IoTE KMITL</span>
                 <h2 class="section-title">จุดเด่นของภาควิชา</h2>
-                <div class="accent-line mx-auto mt-4"></div>
+                <div class="accent-line mt-4 mx-auto"></div>
             </div>
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div class="gap-8 md:grid-cols-3 grid grid-cols-1">
                 @php
                     $highlights = [
                         ['🏆', 'กิจกรรมโดดเด่น', 'ภาควิชาจัดกิจกรรมพิเศษตลอดปี เช่น ค่ายมัธยมและเวิร์กช็อปพัฒนาทักษะ IoT ให้นักศึกษาลงมือสร้างนวัตกรรมจริง'],
@@ -821,7 +821,7 @@
                 opacity: 0.08;
             "
         ></div>
-        <div class="mx-auto max-w-4xl px-4 text-center" style="position: relative; z-index: 1">
+        <div class="max-w-4xl px-4 mx-auto text-center" style="position: relative; z-index: 1">
             <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 1rem">
                 รับสมัครนักศึกษาประจำปี 2569
             </h2>
@@ -831,7 +831,7 @@
             <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; max-width: 500px; margin: 0 auto 2.5rem">
                 Portfolio (75 ที่นั่ง) · Quota (15 ที่นั่ง) · Admission (5 ที่นั่ง)
             </p>
-            <div class="flex flex-wrap justify-center gap-4">
+            <div class="gap-4 flex flex-wrap justify-center">
                 <a
                     href="{{ route('admission') }}"
                     style="

@@ -29,6 +29,7 @@ class CourseFactory extends Factory
             'courseType' => $this->faker->randomElement(['Core', 'Elective', 'Gen', 'Lab']),
             'courseDescript' => $this->faker->paragraph(),
             'courseSemester' => $this->faker->randomElement(['1', '2']),
+            'courseDegree' => $this->faker->randomElement(['One', 'dual']),
         ];
     }
 }

@@ -35,16 +35,56 @@ class PageController extends Controller
 
     public function syllabus()
     {
-        $grouped = course::orderBy('courseYear')
+        $allCourses = Course::orderBy('courseDegree')
+            ->orderBy('courseYear')
             ->orderBy('courseSemester')
             ->orderBy('courseID')
-            ->get()
-            ->groupBy('courseYear')
-            ->map(fn($yearGroup) => $yearGroup->groupBy('courseSemester'));
-        $credits = course::orderBy('courseType')
-            ->get()
-            ->groupBy('courseType')
-            ->map(fn($typeGroup) => $typeGroup->sum('courseCredit'));
+            ->get();
+        $grouped = $allCourses
+            ->groupBy('courseDegree')
+            ->map(
+                fn($degreeGroup) =>
+                $degreeGroup->groupBy('courseYear')
+                    ->map(
+                        fn($yearGroup) =>
+                        // For EACH year group, group again by semester
+                        $yearGroup->groupBy('courseSemester')
+                    )
+            );
+        // $grouped = course::OrderBy('courseDegree')
+        //     ->orderBy('courseYear')
+        //     ->orderBy('courseSemester')
+        //     ->orderBy('courseID')
+        //     ->get()
+        //     ->groupBy('courseDegree')
+        //     ->map(
+        //         fn($degreeGroup) =>
+        //         $degreeGroup->groupBy('courseYear')
+        //             ->map(
+        //                 fn($yearGroup) =>
+        //                 $yearGroup->groupBy('courseSemester')
+        //             )
+        //     );
+        $credits = $allCourses
+            ->groupBy('courseDegree')
+            ->map(
+                fn($degreeGroup) =>
+                $degreeGroup->groupBy('courseType')
+                    ->map(
+                        fn($typeGroup) =>
+                        $typeGroup->sum('courseCredit')
+                    )
+            );
+        // $credits = Course::get()
+        //     ->groupBy('courseDegree')
+        //     ->map(
+        //         fn($degreeGroup) =>
+        //         $degreeGroup->groupBy('courseType')
+        //             ->map(
+        //                 fn($typeGroup) =>
+        //                 $typeGroup->sum('courseCredit')
+        //             )
+        //     );
         return view('syllabus', compact('grouped'), compact('credits'));
     }
 
@@ -63,9 +103,9 @@ class PageController extends Controller
     //     return view('test_contact');
     // }
 
-    public function contacts()
+    public function contact()
     {
-        return view('contacts');
+        return view('contact');
     }
     // ─── Lab Data ────────────────────────────────────────────────────────────
 
