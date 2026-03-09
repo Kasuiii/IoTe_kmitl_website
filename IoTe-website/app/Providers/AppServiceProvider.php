@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') !== 'local') {
             URL::forceScheme('https');
         }
+        if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+            $_SERVER['HTTPS'] = 'on';
+        }
     }
 }

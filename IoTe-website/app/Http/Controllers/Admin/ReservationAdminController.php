@@ -20,7 +20,7 @@ class ReservationAdminController extends Controller
         $reservations = $query->paginate(20);
         $statusOptions = array_keys(Reservation::$statusLabels);
 
-        return view('admin.reservations.index', compact('reservations', 'statusOptions'));
+        return view('reservations.admin', compact('reservations', 'statusOptions'));
     }
 
     // Update reservation status

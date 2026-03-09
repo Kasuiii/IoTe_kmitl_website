@@ -226,7 +226,7 @@
                                 </svg>
                             </a>
 
-                            <a href="{{ route('reservations.admin') }}" class="action-btn">
+                            <a href="{{ route('admin.items.index') }}" class="action-btn">
                                 <div class="action-btn-icon" style="background: rgba(227, 82, 5, 0.08)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--orange)">
                                         <path

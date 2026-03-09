@@ -20,7 +20,6 @@ class ReservableItem extends Model
 
     protected $casts = ['is_active' => 'boolean'];
 
-    // How many are currently borrowed (status = approved OR borrowed)
     public function getCurrentlyBorrowedAttribute(): int
     {
         return $this->reservations()
@@ -28,7 +27,6 @@ class ReservableItem extends Model
             ->sum('quantity_requested');
     }
 
-    // Dynamically compute real availability
     public function getRealAvailableAttribute(): int
     {
         return max(0, $this->quantity_total - $this->currently_borrowed);
@@ -39,10 +37,16 @@ class ReservableItem extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    // Scope: show items accessible to a faculty code
+    // BUG FIX: original code mapped facultyCode 'all' → 'science' by mistake.
+    // Now: 'all' = show every active item (admins / non-matched emails).
     public function scopeAccessibleBy($query, string $facultyCode)
     {
+        if ($facultyCode === 'all') {
+            return $query->where('is_active', true);
+        }
+
         $facultyName = $facultyCode === '01' ? 'engineering' : 'science';
+
         return $query->where(function ($q) use ($facultyName) {
             $q->where('faculty_access', 'all')
                 ->orWhere('faculty_access', $facultyName);

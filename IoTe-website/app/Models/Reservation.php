@@ -24,22 +24,27 @@ class Reservation extends Model
         'actual_return_date' => 'date',
     ];
 
-    // STATUS FLOW:
+    // Status flow:
     // pending → approved → borrowed → returned
     //         → rejected
-    // pending → cancelled (by student)
+    // pending → cancelled  (by student)
     public static array $statusLabels = [
-        'pending'   => ['label' => 'รอการอนุมัติ',  'color' => 'orange'],
-        'approved'  => ['label' => 'อนุมัติแล้ว',  'color' => 'blue'],
-        'borrowed'  => ['label' => 'กำลังยืม',     'color' => 'crimson'],
-        'returned'  => ['label' => 'คืนแล้ว',      'color' => 'green'],
-        'rejected'  => ['label' => 'ไม่อนุมัติ',   'color' => 'red'],
-        'cancelled' => ['label' => 'ยกเลิก',       'color' => 'gray'],
+        'pending'   => ['label' => 'รอการอนุมัติ', 'color' => '#f97316'],
+        'approved'  => ['label' => 'อนุมัติแล้ว',  'color' => '#3b82f6'],
+        'borrowed'  => ['label' => 'กำลังยืม',     'color' => '#dc2626'],
+        'returned'  => ['label' => 'คืนแล้ว',      'color' => '#16a34a'],
+        'rejected'  => ['label' => 'ไม่อนุมัติ',   'color' => '#6b7280'],
+        'cancelled' => ['label' => 'ยกเลิก',       'color' => '#9ca3af'],
     ];
 
     public function getStatusLabelAttribute(): string
     {
         return self::$statusLabels[$this->status]['label'] ?? $this->status;
+    }
+
+    public function getStatusColorAttribute(): string
+    {
+        return self::$statusLabels[$this->status]['color'] ?? '#6b7280';
     }
 
     public function user()
@@ -52,7 +57,6 @@ class Reservation extends Model
         return $this->belongsTo(ReservableItem::class, 'reservable_item_id');
     }
 
-    // Check if reservation is overdue
     public function getIsOverdueAttribute(): bool
     {
         return $this->status === 'borrowed' && $this->return_date->isPast();
