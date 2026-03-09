@@ -227,7 +227,7 @@
                                 </svg>
                             </a>
 
-                            <a href="{{ route('home') }}" class="nav-action">
+                            <a href="{{ route('reservations.index') }}" class="nav-action">
                                 <div class="nav-action-icon" style="background: rgba(107, 99, 96, 0.08)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--muted)">
                                         <path
@@ -239,8 +239,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-sm" style="color: var(--dark)">หน้าหลักเว็บไซต์</div>
-                                    <div class="text-xs" style="color: var(--muted)">กลับสู่หน้า IoTe หลัก</div>
+                                    <div class="font-semibold text-sm" style="color: var(--dark)">ยืมอุปกรณ์และเครื่องมือภาควิชา</div>
+                                    <div class="text-xs" style="color: var(--muted)">จัดการการยืมอุปกรณ์และเครื่องมือของภาควิชา</div>
                                 </div>
                                 <svg
                                     class="w-4 h-4 ml-auto"
@@ -266,7 +266,7 @@
                                             />
                                         </svg>
                                     </div>
-                                    <div>
+                                    <div class="flex-1 text-left">
                                         <div class="font-semibold text-sm" style="color: #dc2626">ออกจากระบบ</div>
                                         <div class="text-xs" style="color: var(--muted)">Logout</div>
                                     </div>

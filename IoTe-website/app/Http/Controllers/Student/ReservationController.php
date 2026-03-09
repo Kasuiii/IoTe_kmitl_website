@@ -14,7 +14,7 @@ class ReservationController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $facultyCode = $user->faculty_code ?? 'all';
+        $facultyCode = $user->faculty_code ?? $this->detectFacultyFromEmail($user->email);
 
         // accessibleBy() scope filters items the student is allowed to borrow
         $items = ReservableItem::accessibleBy($facultyCode)
@@ -32,7 +32,7 @@ class ReservationController extends Controller
             ->latest()
             ->get();
 
-        return view('student.reservations.index', compact('byCategory', 'myActiveReservations', 'user'));
+        return view('reservations.index', compact('byCategory', 'myActiveReservations', 'user'));
     }
 
     // ── SHOW reservation history ──────────────────────────────
@@ -43,7 +43,7 @@ class ReservationController extends Controller
             ->with('item')
             ->latest()
             ->paginate(15);
-        return view('student.reservations.history', compact('reservations'));
+        return view('reservations.history', compact('reservations'));
     }
 
     // ── SHOW reservation form ─────────────────────────────────
@@ -65,7 +65,7 @@ class ReservationController extends Controller
         // How many is actually available right now?
         $availableQty = $item->real_available;
 
-        return view('student.reservations.create', compact('item', 'availableQty', 'user'));
+        return view('reservations.create', compact('item', 'availableQty', 'user'));
     }
 
     // ── SAVE reservation request ──────────────────────────────
@@ -80,16 +80,31 @@ class ReservationController extends Controller
             'purpose'            => 'required|string|max:500',
         ]);
 
-        // Check qty does not exceed available
-        if ($data['quantity_requested'] > $item->real_available) {
-            return back()->withErrors(['quantity_requested' => 'จำนวนที่ขอเกินจำนวนที่มีในคลัง']);
-        }
-
-        // Check the borrow period doesn't exceed max_borrow_days
+        // Check borrow duration
         $days = \Carbon\Carbon::parse($data['borrow_date'])
             ->diffInDays(\Carbon\Carbon::parse($data['return_date']));
+
         if ($days > $item->max_borrow_days) {
-            return back()->withErrors(['return_date' => "ระยะเวลายืมสูงสุด {$item->max_borrow_days} วัน"]);
+            return back()->withErrors([
+                'return_date' => "ระยะเวลายืมสูงสุด {$item->max_borrow_days} วัน"
+            ]);
+        }
+
+        // Find conflicting reservations
+        $reservedQty = Reservation::where('reservable_item_id', $item->id)
+            ->whereIn('status', ['pending', 'approved', 'borrowed'])
+            ->where(function ($q) use ($data) {
+                $q->where('borrow_date', '<=', $data['return_date'])
+                    ->where('return_date', '>=', $data['borrow_date']);
+            })
+            ->sum('quantity_requested');
+
+        $availableQty = $item->quantity_total - $reservedQty;
+
+        if ($data['quantity_requested'] > $availableQty) {
+            return back()->withErrors([
+                'quantity_requested' => "อุปกรณ์ไม่พอในช่วงเวลาที่เลือก (เหลือ {$availableQty})"
+            ]);
         }
 
         Reservation::create([
@@ -99,10 +114,9 @@ class ReservationController extends Controller
             'status'             => 'pending',
         ]);
 
-        return redirect()->route('student.reservations.index')
-            ->with('success', 'ส่งคำขอยืมอุปกรณ์สำเร็จ! รอการอนุมัติจากเจ้าหน้าที่');
+        return redirect()->route('reservations.index')
+            ->with('success', 'ส่งคำขอยืมอุปกรณ์สำเร็จ! รอการอนุมัติ');
     }
-
     // ── CANCEL a pending reservation ─────────────────────────
     public function cancel(Reservation $reservation)
     {
@@ -115,5 +129,17 @@ class ReservationController extends Controller
 
         $reservation->update(['status' => 'cancelled']);
         return back()->with('success', 'ยกเลิกคำขอสำเร็จ');
+    }
+    private function detectFacultyFromEmail($email)
+    {
+        if (preg_match('/67(01)/', $email)) {
+            return '01'; // engineering
+        }
+
+        if (preg_match('/67(05)/', $email)) {
+            return '05'; // science
+        }
+
+        return 'all';
     }
 }

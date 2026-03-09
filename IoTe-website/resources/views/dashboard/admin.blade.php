@@ -226,7 +226,7 @@
                                 </svg>
                             </a>
 
-                            <a href="{{ route('laboratories.index') }}" class="action-btn">
+                            <a href="{{ route('reservations.admin') }}" class="action-btn">
                                 <div class="action-btn-icon" style="background: rgba(227, 82, 5, 0.08)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--orange)">
                                         <path
@@ -238,8 +238,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-sm" style="color: var(--dark)">ห้องปฏิบัติการ</div>
-                                    <div class="text-xs" style="color: var(--muted)">จัดการข้อมูล Lab</div>
+                                    <div class="font-semibold text-sm" style="color: var(--dark)">จัดการอุปกรณ์</div>
+                                    <div class="text-xs" style="color: var(--muted)">จัดการข้อมูลอุปกรณ์และเครื่องมือภาควิชา</div>
                                 </div>
                                 <svg
                                     class="w-4 h-4 ml-auto"

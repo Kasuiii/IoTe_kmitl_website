@@ -45,8 +45,11 @@ Route::middleware('auth')->group(function () {
     // Browse & reserve equipment
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
     Route::get('/reservations/history', [ReservationController::class, 'history'])->name('reservations.history');
-    Route::get('/reservations/{item}/create', [ReservationController::class, 'create'])->name('reservations.create');
-    Route::post('/reservations/{item}', [ReservationController::class, 'store'])->name('reservations.store');
+    Route::get('/reservations/{reservableItem}/create', [ReservationController::class, 'create'])
+        ->name('reservations.create');
+
+    Route::post('/reservations/{reservableItem}', [ReservationController::class, 'store'])
+        ->name('reservations.store');
     Route::patch('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
 });
 
@@ -68,15 +71,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('faculty', FacultyController::class)->except(['show']);
     });
-    // Route::resource('faculty', FacultyController::class)->except(['show'])->names([
-    //     'index' => 'faculty.index',
-    //     'admin' => 'faculty.admin',
-    //     'create' => 'faculty.create',
-    //     'store' => 'faculty.store',
-    //     'edit' => 'faculty.edit',
-    //     'update' => 'faculty.update',
-    //     'destroy' => 'faculty.destroy',
-    // ]);
+
     Route::prefix('admin/admission')->name('admin.admission.')->group(function () {
 
         Route::get('/', [AdmissionController::class, 'index'])->name('index');
@@ -96,14 +91,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::delete('/projects/{project}', [AdmissionController::class, 'destroyProject'])->name('projects.destroy');
     });
 
-    // ── User Management ─────────────────────────────────────
+    //  User Management 
     Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/role', [UserManagementController::class, 'updateRole'])->name('users.updateRole');
 
-    // ── Item/Equipment Management ───────────────────────────
+    //  Item/Equipment Management 
     Route::resource('items', ItemController::class);
 
-    // ── Reservations (admin view all) ───────────────────────
-    Route::get('/reservations', [ReservationAdminController::class, 'index'])->name('reservations.index');
-    Route::patch('/reservations/{reservation}/status', [ReservationAdminController::class, 'updateStatus'])->name('reservations.updateStatus');
+    //  Reservations (admin view all)
+    Route::get('/reservations/admin', [ReservationAdminController::class, 'index'])->name('reservations.admin');
+    Route::patch('/reservations/{reservation}/status', [ReservationAdminController::class, 'updateStatus'])->name('reservations_admin.updateStatus');
 });
