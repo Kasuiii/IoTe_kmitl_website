@@ -1,0 +1,124 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class StarterFacultyMember extends Seeder
+{
+    public function run(): void
+    {
+        $faculty = [
+
+            [
+                'prefix' => 'Professor / ศ.',
+                'name_en' => 'Prof.Dr. Apirat Siritaratiwat',
+                'name_th' => 'ศ.ดร.อภิรัฐ ศิริธราธิวัตร',
+                'position' => 'professor',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายวิจัยและนวัตกรรม)',
+                'email' => null,
+                'research_interests' => 'Research & Innovation',
+                'photo_url' => null,
+            ],
+
+            [
+                'prefix' => 'Professor / ศ.',
+                'name_en' => 'Prof.Dr. Pitikhate Sooraksa',
+                'name_th' => 'ศ.ดร.ปิติเขต สู้รักษา',
+                'position' => 'professor',
+                'role' => 'อาจารย์ประจำหลักสูตร',
+                'email' => 'pitikhate.so@kmitl.ac.th',
+                'research_interests' => 'IT Automation, Industrial Informatics',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจปิติเขต.jpg',
+            ],
+
+            [
+                'prefix' => 'Assoc. Prof. / รศ.',
+                'name_en' => 'Assoc.Prof.Dr. Boonchana Purahong',
+                'name_th' => 'รศ.ดร.บุณย์ชนะ ภู่ระหงษ์',
+                'position' => 'associate',
+                'role' => 'ประธานหลักสูตรฯ',
+                'email' => 'boonchana.pu@kmitl.ac.th',
+                'research_interests' => 'Microprocessor, Microcontroller, Robotics, IoT & Smart System',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/kpboonch-251x300.jpg',
+            ],
+
+            [
+                'prefix' => 'Assoc. Prof. / รศ.',
+                'name_en' => 'Assoc.Prof.Dr. Attasit Lasakul',
+                'name_th' => 'รศ.ดร.อรรถสิทธิ์ หล่าสกุล',
+                'position' => 'associate',
+                'role' => 'อาจารย์พิเศษ',
+                'email' => 'attasit.la@kmitl.ac.th',
+                'research_interests' => 'Digital Processing, Image Watermarking, Embedded Systems, Machine Vision',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจอรรถ.jpg',
+            ],
+
+            [
+                'prefix' => 'Asst. Prof. / ผศ.',
+                'name_en' => 'Asst.Prof.Dr. Vanvisa Chutchavong',
+                'name_th' => 'ผศ.ดร.วันวิสา ชัชวงษ์',
+                'position' => 'assistant',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายการเงิน)',
+                'email' => 'vanvisa.ch@kmitl.ac.th',
+                'research_interests' => 'Electronic, Bernstein Filter, Railway Signaling, Pattern Recognition',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจไก่.jpg',
+            ],
+
+            [
+                'prefix' => 'Asst. Prof. / ผศ.',
+                'name_en' => 'Asst.Prof.Dr. Natchanai Roongmuanpha',
+                'name_th' => 'ผศ.ดร.นัชนัยน์ รุ่งเหมือนฟ้า',
+                'position' => 'assistant',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายต่างประเทศ)',
+                'email' => 'natchanai.ro@kmitl.ac.th',
+                'research_interests' => 'Immittance Simulators, Active Analog Filters, Oscillator Design, Chaotic Circuits',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจโอม.jpg',
+            ],
+
+            [
+                'prefix' => 'Asst. Prof. / ผศ.',
+                'name_en' => 'Asst.Prof.Dr. Kleddao Satcharoen',
+                'name_th' => 'ผศ.ดร.เกล็ดดาว สัตย์เจริญ',
+                'position' => 'assistant',
+                'role' => 'อาจารย์ประจำภาควิชา',
+                'email' => 'kleddao.sa@kmitl.ac.th',
+                'research_interests' => 'Human Computer Interaction, User Interfaces',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจฝน.jpg',
+            ],
+
+            [
+                'prefix' => 'Asst. Prof. / ผศ.',
+                'name_en' => 'Asst.Prof. Nitjaree Satayarak',
+                'name_th' => 'ผศ.นิจจารีย์ สัตยารักษ์',
+                'position' => 'assistant',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการนักศึกษา)',
+                'email' => 'nitjaree.sa@kmitl.ac.th',
+                'research_interests' => 'Software Engineering, Distributed Testing System',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจนิจ.jpg',
+            ],
+
+            [
+                'prefix' => 'Lecturer / ดร.',
+                'name_en' => 'Dr. Suwilai Phumpho',
+                'name_th' => 'ดร.สุวิไล พุ่มโพธิ์',
+                'position' => 'lecturer',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการภายนอก)',
+                'email' => 'suwilai.ph@kmitl.ac.th',
+                'research_interests' => 'Immittance Function Simulators',
+                'photo_url' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2025/10/images.jpg',
+            ],
+
+        ];
+
+        foreach ($faculty as $index => $member) {
+            DB::table('faculty_members')->insert([
+                ...$member,
+                'sort_order' => $index + 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+    }
+}
