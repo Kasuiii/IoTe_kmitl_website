@@ -13,7 +13,8 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: url('https://i.pinimg.com/736x/94/b1/e7/94b1e74e89ecbc3544591b018dfab077.jpg') center/cover;
+            background: url('https://images.unsplash.com/photo-1704556197883-11345de0c745?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+                center/cover;
             opacity: 0.08;
         }
         .lab-card {

@@ -133,7 +133,8 @@
         style="
             position: absolute;
             inset: 0;
-            background: url('https://i.pinimg.com/736x/7d/58/05/7d58058a1aac01379cd8213a08309b18.jpg') center/cover;
+            background: url('https://images.unsplash.com/photo-1761497727878-6df040d5bbf6?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+                center/cover;
             opacity: 0.7;
         "
     ></div>

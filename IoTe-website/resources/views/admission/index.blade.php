@@ -131,7 +131,8 @@
             style="
                 position: absolute;
                 inset: 0;
-                background: url('https://i.pinimg.com/736x/18/54/2e/18542e885f36e97d0c2150f0766f3590.jpg') center/cover;
+                background: url('https://lh3.googleusercontent.com/gg-dl/AOI_d_-IOuy6LrDiNfLvFXxLB-MQlumWblX-r4Dxdy0ra-kqUHgJM6Lm74kvzC6n2Aw6_eIK-6_40Iiadfv_xsooH0_Pl_s_59goJc6BLGXJUufDI61LY-das89IJxN_G5qTUGCVbk_5eIDU5EpUqsznXTCGBga6CIV01t8TZTaMNi3ajIB-=s1024-rj')
+                    center/cover;
                 opacity: 0.7;
             "
         ></div>

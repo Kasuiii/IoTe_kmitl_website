@@ -311,7 +311,9 @@
         <div class="hero-slide">
             <div
                 class="hero-slide-bg"
-                style="background-image: url('https://i.pinimg.com/736x/0c/5a/50/0c5a50fc391d1888b4ae60a674e8cd06.jpg')"
+                style="
+                    background-image: url('https://images.unsplash.com/photo-1745571479662-54a2ad1c747f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+                "
             ></div>
             <div class="hero-content">
                 <div class="hero-dept">Internet of Things · คณะวิศวกรรมศาสตร์ KMITL</div>
@@ -319,9 +321,9 @@
                     The Power of
                     <br />
                     Creatation
-                    <em style="color: #ffaa77">Madara Uchiha</em>
+                    <em style="color: #ffaa77">IoT Engineering</em>
                 </h1>
-                <p>From ninja to IoT engineer.</p>
+                <p>From a star to be IoT engineer.</p>
                 <div class="hero-btns gap-4 flex flex-wrap justify-center">
                     <a href="{{ route('syllabus') }}" class="btn-primary">View Curriculum</a>
                     <a
@@ -347,7 +349,7 @@
         <div class="hero-slide">
             <div
                 class="hero-slide-bg"
-                style="background-image: url('https://i.pinimg.com/736x/24/d0/b8/24d0b8bcf38de0bf0a15b66f32fbc74b.jpg')"
+                style="background-image: url('https://images.unsplash.com/photo-1650530415027-dc9199f473ec?q=80&w=1633&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
             ></div>
             <div class="hero-content">
                 <div class="hero-dept">Thailand 5G</div>
@@ -355,9 +357,9 @@
                     The Secret
                     <br />
                     of
-                    <em style="color: #ffaa77">ติ๋ม</em>
+                    <em style="color: #ffaa77">IoT Engineering at kmitl</em>
                 </h1>
-                <p>PhysIoT เท่ ๆ</p>
+                <p>วิศวกรรมระบบไอโอทีแห่งเดียวในประเทศไทย</p>
                 <div class="hero-btns gap-4 flex flex-wrap justify-center">
                     <a href="{{ route('admission.index') }}" class="btn-primary">How to Apply</a>
                     <a

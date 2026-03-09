@@ -201,7 +201,8 @@
             style="
                 position: absolute;
                 inset: 0;
-                background: url('https://i.pinimg.com/736x/9a/9b/c1/9a9bc1e371ae7b3c08f6c2037fd70bbc.jpg') center/cover;
+                background: url('https://plus.unsplash.com/premium_photo-1764695543417-4f5ad860c297?q=80&w=1017&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%')
+                    center/cover;
                 opacity: 0.7;
             "
         ></div>
