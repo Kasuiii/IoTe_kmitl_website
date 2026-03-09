@@ -304,9 +304,16 @@
 
         {{-- DEGREE TAB BUTTONS --}}
         <div class="mb-6 gap-3 flex flex-wrap justify-center">
+            @php
+                $degreeMap = [
+                    'One' => 'Single Degree',
+                    'dual' => 'Dual Degree',
+                ];
+            @endphp
+
             @foreach ($grouped as $degree => $degreeYears)
                 <button class="degree-tab {{ $loop->first ? 'active' : '' }}" data-degree="{{ $loop->index }}">
-                    {{ $degree }}
+                    {{ $degreeMap[$degree] ?? $degree }}
                 </button>
             @endforeach
         </div>
@@ -365,7 +372,7 @@
                     @endforeach
                 </div>
 
-                {{-- ── LEGEND ── --}}
+                {{-- LEGEND --}}
                 <div class="mb-6 gap-3 text-xs font-semibold flex flex-wrap">
                     <span>
                         <span class="credit-badge type-core" style="padding: 0.2rem 0.6rem">CORE</span>
@@ -385,7 +392,7 @@
                     </span>
                 </div>
 
-                {{-- ── COURSE HEADER ROW ── --}}
+                {{-- COURSE HEADER ROW --}}
                 <div
                     class="course-row mb-2"
                     style="

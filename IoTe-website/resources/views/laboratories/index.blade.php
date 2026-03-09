@@ -111,7 +111,7 @@
 @section('content')
     <!-- HERO -->
     <section class="lab-hero">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style="position: relative; z-index: 1">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto" style="position: relative; z-index: 1">
             <div class="max-w-2xl">
                 <span class="section-label" style="color: rgba(255, 163, 107, 0.9)">Our Facilities</span>
                 <h1
@@ -138,8 +138,8 @@
 
     <!-- BREADCRUMB -->
     <div style="background: var(--light); border-bottom: 1px solid var(--border); padding: 0.875rem 0">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav class="flex items-center gap-2 text-sm" style="color: var(--muted)">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+            <nav class="gap-2 text-sm flex items-center" style="color: var(--muted)">
                 <a href="{{ route('home') }}" class="hover:text-crimson transition-colors" style="color: inherit">Home</a>
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -151,17 +151,17 @@
 
     <!-- LAB OVERVIEW INTRO -->
     <section style="padding: 4rem 0; background: #fff">
-        <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
             <span class="section-label">World-Class Facilities</span>
             <h2 class="section-title">Explore Our Labs</h2>
-            <div class="accent-line mx-auto mt-2"></div>
-            <p class="mx-auto mb-5 max-w-2xl text-lg" style="color: var(--muted)">
+            <div class="accent-line mt-2 mx-auto"></div>
+            <p class="mb-5 max-w-2xl text-lg mx-auto" style="color: var(--muted)">
                 Each laboratory is equipped with industry-grade hardware and software to support cutting-edge research and hands-on student
                 learning.
             </p>
 
             <!-- Feature highlights -->
-            <div class="mt-15 grid grid-cols-2 gap-6 text-left md:grid-cols-4">
+            <div class="mt-15 gap-6 md:grid-cols-4 grid grid-cols-2 text-left">
                 @foreach ([
                         ['icon' => '🔬', 'title' => 'Industry-Grade Equipment', 'desc' => 'Funded by leading technology partners'],
                         ['icon' => '🤝', 'title' => 'Open to Students', 'desc' => 'Access all year round for projects'],
@@ -181,8 +181,8 @@
 
     <!-- LAB CARDS -->
     <section style="padding: 2rem 0 7rem; background: var(--light)">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+            <div class="gap-8 md:grid-cols-3 grid grid-cols-1">
                 <!-- Lab 1 -->
                 <div class="lab-card">
                     <div class="lab-card-img">
@@ -191,10 +191,7 @@
                         <div class="lab-card-img-overlay"></div>
                     </div>
                     <div class="lab-card-body">
-                        <span class="tag mb-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores quaerat corrupti error deleniti fugit ut modi
-                            neque incidunt! Nisi fuga facere unde quo cum odio id iste! Quos, corporis tempore.
-                        </span>
+                        <span class="tag mb-3">Cyber security.</span>
                         <h3
                             style="
                                 font-family: 'Playfair Display', serif;
@@ -204,100 +201,18 @@
                                 margin-bottom: 0.75rem;
                             "
                         >
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum recusandae odio exercitationem dolor aut
-                            reprehenderit quis illo alias et aspernatur? Quidem explicabo, nesciunt dignissimos accusantium molestiae
-                            aliquam natus qui nulla?
+                            Cybersecurity Lab
                         </h3>
                         <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores illum ab quos, sapiente autem distinctio odit
-                            velit incidunt excepturi nobis error. Soluta esse minima possimus tempora, porro alias similique eligendi.
+                            Lab cybersecurity ภาควิชาวิศวกรรมไอโอทีและสารสนเทศ
+                            มุ่งเน้นไปทีการพัฒนาและวิจัยด้านความมั่นคงปลอดภัยไซเบอร์ในระบบฝังตัวและเครือข่ายอัจฉริยะจากภาควิชาวิศวกรรมไอโอทีและสารสนเทศ
                         </p>
-                        <div class="mb-6 flex flex-wrap gap-2">
+                        <div class="mb-6 gap-2 flex flex-wrap">
                             @foreach (['FPGA', 'ARM Cortex', 'PCB Design', 'RTOS', 'Edge AI'] as $t)
                                 <span class="tag" style="font-size: 0.7rem">{{ $t }}</span>
                             @endforeach
                         </div>
                         <a href="{{ route('laboratories.show', 1) }}" class="lab-arrow">
-                            Explore This Lab
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Lab 2 -->
-                <div class="lab-card">
-                    <div class="lab-card-img">
-                        <div class="lab-number">02</div>
-                        <img
-                            src="https://i.pinimg.com/1200x/ec/9e/a2/ec9ea2077e13d4a3ec19aeaa7e79b027.jpg"
-                            alt="Network & Communications Lab"
-                        />
-                        <div class="lab-card-img-overlay"></div>
-                    </div>
-                    <div class="lab-card-body">
-                        <span class="tag mb-3">Connectivity & Protocols</span>
-                        <h3
-                            style="
-                                font-family: 'Playfair Display', serif;
-                                font-size: 1.5rem;
-                                font-weight: 700;
-                                color: var(--dark);
-                                margin-bottom: 0.75rem;
-                            "
-                        >
-                            Lab rai wa
-                        </h3>
-                        <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod at nisi incidunt distinctio voluptate ullam,
-                            officiis voluptatem exercitationem possimus iusto ipsam reprehenderit vero, numquam repudiandae facere
-                            inventore, vitae consectetur accusantium?
-                        </p>
-                        <div class="mb-6 flex flex-wrap gap-2">
-                            @foreach (['LoRaWAN', '5G/NB-IoT', 'Zigbee', 'MQTT', 'Network Security'] as $t)
-                                <span class="tag" style="font-size: 0.7rem">{{ $t }}</span>
-                            @endforeach
-                        </div>
-                        <a href="{{ route('laboratories.show', 2) }}" class="lab-arrow">
-                            Explore This Lab
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Lab 3 -->
-                <div class="lab-card">
-                    <div class="lab-card-img">
-                        <div class="lab-number">03</div>
-                        <img src="https://i.pinimg.com/1200x/ec/9e/a2/ec9ea2077e13d4a3ec19aeaa7e79b027.jpg" alt="Smart Systems Lab" />
-                        <div class="lab-card-img-overlay"></div>
-                    </div>
-                    <div class="lab-card-body">
-                        <span class="tag mb-3">Cyber security laboratory</span>
-                        <h3
-                            style="
-                                font-family: 'Playfair Display', serif;
-                                font-size: 1.5rem;
-                                font-weight: 700;
-                                color: var(--dark);
-                                margin-bottom: 0.75rem;
-                            "
-                        >
-                            Cyber Security Laboratory
-                        </h3>
-                        <p class="mb-4 text-sm leading-relaxed" style="color: var(--muted)">
-                            Exploring network security, cryptography, secure communication protocols, and threat detection in IoT
-                            environments.
-                        </p>
-                        <div class="mb-6 flex flex-wrap gap-2">
-                            @foreach (['TensorFlow Lite', 'Computer Vision', 'Predictive ML', 'Digital Twin', 'Smart Grid'] as $t)
-                                <span class="tag" style="font-size: 0.7rem">{{ $t }}</span>
-                            @endforeach
-                        </div>
-                        <a href="{{ route('laboratories.show', 3) }}" class="lab-arrow">
                             Explore This Lab
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

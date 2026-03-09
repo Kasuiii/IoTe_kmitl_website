@@ -38,15 +38,14 @@ class ItemController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('items', 'public');
-            $data['image_url'] = '/storage/' . $path;
+            // Storage::url() respects your filesystems.php config (local OR S3/cloud)
+            $data['image_url'] = Storage::url($path);
         }
 
         $data['quantity_available'] = $data['quantity_total'];
         $data['is_active']          = $request->boolean('is_active', true);
 
         ReservableItem::create($data);
-
-        // BUG FIX: route name is now 'admin.items.index' (matched by web.php prefix group)
         return redirect()->route('admin.items.index')->with('success', 'เพิ่มอุปกรณ์สำเร็จ!');
     }
 
@@ -69,11 +68,14 @@ class ItemController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
+            // Delete old image file if it exists
             if ($item->image_url) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $item->image_url));
+                $oldPath = ltrim(parse_url($item->image_url, PHP_URL_PATH), '/');
+                $oldPath = preg_replace('#^storage/#', '', $oldPath);
+                Storage::disk('public')->delete($oldPath);
             }
             $path = $request->file('image')->store('items', 'public');
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = Storage::url($path);
         }
 
         $data['is_active'] = $request->boolean('is_active');
@@ -85,7 +87,9 @@ class ItemController extends Controller
     public function destroy(ReservableItem $item)
     {
         if ($item->image_url) {
-            Storage::disk('public')->delete(str_replace('/storage/', '', $item->image_url));
+            $oldPath = ltrim(parse_url($item->image_url, PHP_URL_PATH), '/');
+            $oldPath = preg_replace('#^storage/#', '', $oldPath);
+            Storage::disk('public')->delete($oldPath);
         }
         $item->delete();
 

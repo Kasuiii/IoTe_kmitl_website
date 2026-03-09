@@ -13,7 +13,7 @@ class ReservationController extends Controller
     public function index()
     {
         $user        = Auth::user();
-        $facultyCode = $user->faculty_code ?? $this->detectFacultyFromEmail($user->email);
+        $facultyCode = $this->getFacultyCode($user->email);
 
         $items = ReservableItem::accessibleBy($facultyCode)
             ->orderBy('category')->orderBy('name')->get();
@@ -37,21 +37,23 @@ class ReservationController extends Controller
 
     public function create(ReservableItem $item)
     {
-        $user        = Auth::user();
-        $facultyCode = $user->faculty_code ?? $this->detectFacultyFromEmail($user->email);
+        $facultyCode = $this->getFacultyCode(Auth::user()->email);
+        $itemAccess  = $item->faculty_access; // uses the accessor — empty "" becomes "all"
 
-        $allowed = $item->faculty_access === 'all'
-            || ($item->faculty_access === 'engineering' && $facultyCode === '01')
-            || ($item->faculty_access === 'science'     && $facultyCode === '05');
+        $allowed = empty($itemAccess)
+            || $itemAccess === 'all'
+            || ($itemAccess === 'engineering' && $facultyCode === '01')
+            || ($itemAccess === 'science'     && $facultyCode === '05');
 
         if (!$allowed) {
             return redirect()->route('reservations.index')
                 ->with('error', 'คุณไม่มีสิทธิ์ยืมอุปกรณ์นี้');
         }
 
-        $availableQty = $item->real_available;
-
-        return view('reservations.create', compact('item', 'availableQty'));
+        return view('reservations.create', [
+            'item'         => $item,
+            'availableQty' => $item->real_available,
+        ]);
     }
 
     public function store(Request $request, ReservableItem $item)
@@ -72,7 +74,6 @@ class ReservationController extends Controller
             ])->withInput();
         }
 
-        // Count how many units are already reserved in the requested date range
         $reservedQty = Reservation::where('reservable_item_id', $item->id)
             ->whereIn('status', ['pending', 'approved', 'borrowed'])
             ->where(function ($q) use ($data) {
@@ -102,7 +103,6 @@ class ReservationController extends Controller
 
     public function cancel(Reservation $reservation)
     {
-        // Students can only cancel their OWN pending reservations
         if ($reservation->user_id !== Auth::id() || $reservation->status !== 'pending') {
             return back()->with('error', 'ไม่สามารถยกเลิกได้');
         }
@@ -111,10 +111,14 @@ class ReservationController extends Controller
         return back()->with('success', 'ยกเลิกคำขอสำเร็จ');
     }
 
-    private function detectFacultyFromEmail(string $email): string
+    private function getFacultyCode(string $email): string
     {
-        if (preg_match('/6701/', $email)) return '01'; // engineering
-        if (preg_match('/6705/', $email)) return '05'; // science
+        $local = explode('@', $email)[0];
+        if (strlen($local) >= 4) {
+            $code = substr($local, 2, 2);
+            if ($code === '01') return '01';
+            if ($code === '05') return '05';
+        }
         return 'all';
     }
 }

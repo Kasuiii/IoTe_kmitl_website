@@ -20,6 +20,12 @@ class ReservableItem extends Model
 
     protected $casts = ['is_active' => 'boolean'];
 
+    // Treat empty string the same as 'all'
+    public function getFacultyAccessAttribute($value): string
+    {
+        return (empty($value)) ? 'all' : $value;
+    }
+
     public function getCurrentlyBorrowedAttribute(): int
     {
         return $this->reservations()
@@ -37,8 +43,6 @@ class ReservableItem extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    // BUG FIX: original code mapped facultyCode 'all' → 'science' by mistake.
-    // Now: 'all' = show every active item (admins / non-matched emails).
     public function scopeAccessibleBy($query, string $facultyCode)
     {
         if ($facultyCode === 'all') {
@@ -48,7 +52,10 @@ class ReservableItem extends Model
         $facultyName = $facultyCode === '01' ? 'engineering' : 'science';
 
         return $query->where(function ($q) use ($facultyName) {
+            // empty string = all, so include it too
             $q->where('faculty_access', 'all')
+                ->orWhere('faculty_access', '')
+                ->orWhereNull('faculty_access')
                 ->orWhere('faculty_access', $facultyName);
         })->where('is_active', true);
     }

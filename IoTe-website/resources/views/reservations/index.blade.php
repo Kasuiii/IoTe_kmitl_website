@@ -3,26 +3,27 @@
 
 @section('content')
     {{-- Hero --}}
-    <section class="contact-hero">
-        <div class="max-w-7xl px-6 mx-auto">
+    <section class="contact-hero" style="background: var(--crimson); padding: 4rem 0">
+        <div class="max-w-7xl px-6 py-4 mx-auto">
             <p
                 style="
-                    color: rgba(255, 255, 255, 0.55);
+                    color: rgba(255, 255, 255, 0.65);
                     font-size: 0.85rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
                     margin-bottom: 0.75rem;
+                    margin-top: 0;
                 "
             >
                 Laboratory Services
             </p>
             <h1 style="color: white; font-size: 2.8rem; font-weight: 800; line-height: 1.15; margin: 0">Equipment Reservation</h1>
-            <p style="color: rgba(255, 255, 255, 0.7); margin-top: 0.85rem; font-size: 1rem; max-width: 520px">
+            <p style="color: rgba(255, 255, 255, 0.75); margin-top: 0.85rem; font-size: 1rem; max-width: 520px; margin-bottom: 0">
                 Browse and reserve laboratory equipment for your courses and research projects.
             </p>
 
-            <div style="display: flex; gap: 1rem; margin-top: 1.75rem; flex-wrap: wrap">
+            <div style="display: flex; gap: 1rem; margin-top: 1.75rem; flex-wrap: wrap; align-items: center">
                 <a
                     href="{{ route('reservations.history') }}"
                     style="
@@ -37,7 +38,7 @@
                         font-size: 0.88rem;
                         font-weight: 600;
                         text-decoration: none;
-                        border: 1px solid rgba(255, 255, 255, 0.25);
+                        border: 1px solid rgba(255, 255, 255, 0.3);
                     "
                     onmouseover="this.style.background = 'rgba(255,255,255,0.25)'"
                     onmouseout="this.style.background = 'rgba(255,255,255,0.15)'"
@@ -60,7 +61,7 @@
                             align-items: center;
                             gap: 0.45rem;
                             background: rgba(251, 191, 36, 0.2);
-                            border: 1px solid rgba(251, 191, 36, 0.4);
+                            border: 1px solid rgba(251, 191, 36, 0.45);
                             color: #fef3c7;
                             padding: 0.6rem 1.25rem;
                             border-radius: 0.5rem;
@@ -140,6 +141,9 @@
                                     transform 0.2s,
                                     box-shadow 0.2s;
                                 position: relative;
+                                background: white;
+                                border-radius: 1rem;
+                                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
                             "
                             onmouseover="
                                 this.style.transform = 'translateY(-3px)';
@@ -147,11 +151,11 @@
                             "
                             onmouseout="
                                 this.style.transform = '';
-                                this.style.boxShadow = '';
+                                this.style.boxShadow = '0 1px 6px rgba(0,0,0,0.07)';
                             "
                         >
                             {{-- Faculty badge --}}
-                            @if ($item->faculty_access !== 'all')
+                            @if (! empty($item->faculty_access) && $item->faculty_access !== 'all')
                                 <div
                                     style="
                                         position: absolute;
@@ -176,12 +180,13 @@
                             {{-- Image --}}
 
                             @if ($item->image_url)
-                                <div style="overflow: hidden; height: 180px">
+                                <div style="overflow: hidden; height: 180px; border-radius: 1rem 1rem 0 0">
                                     <img
                                         src="{{ $item->image_url }}"
                                         alt="{{ $item->name }}"
-                                        style="width:100%; height:180px; object-fit:cover; transition:transform 0.4s;
-                                            {{ ! $available ? 'filter:grayscale(55%)' : '' }}"
+                                        style="width: 100%; height: 180px; object-fit: cover;
+                                            transition: transform 0.4s;
+                                            {{ ! $available ? 'filter: grayscale(55%)' : '' }}"
                                         onmouseover="this.style.transform = 'scale(1.05)'"
                                         onmouseout="this.style.transform = 'scale(1)'"
                                     />
@@ -190,7 +195,8 @@
                                 <div
                                     style="
                                         height: 150px;
-                                        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+                                        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+                                        border-radius: 1rem 1rem 0 0;
                                         display: flex;
                                         align-items: center;
                                         justify-content: center;
@@ -215,8 +221,9 @@
                                 </div>
                             @endif
 
-                            {{-- Content --}}
+                            {{-- Card body --}}
                             <div style="padding: 1.25rem 1.25rem 1.5rem; flex: 1; display: flex; flex-direction: column">
+                                {{-- Name + availability pill --}}
                                 <div
                                     style="
                                         display: flex;
@@ -261,6 +268,7 @@
                                     @endif
                                 </div>
 
+                                {{-- Description --}}
                                 @if ($item->description)
                                     <p style="font-size: 0.83rem; color: #64748b; line-height: 1.55; margin: 0 0 0.85rem; flex: 1">
                                         {{ Str::limit($item->description, 90) }}
@@ -269,7 +277,7 @@
                                     <div style="flex: 1"></div>
                                 @endif
 
-                                {{-- Meta --}}
+                                {{-- Meta row --}}
                                 <div
                                     style="
                                         display: flex;
@@ -342,7 +350,6 @@
                                 @else
                                     <div
                                         style="
-                                            display: block;
                                             text-align: center;
                                             background: #f1f5f9;
                                             color: #94a3b8;

@@ -44,8 +44,8 @@ Route::middleware('auth')->group(function () {
     // so Laravel doesn't treat the word "history" as a model ID.
     Route::get('/reservations',         [ReservationController::class, 'index'])->name('reservations.index');
     Route::get('/reservations/history', [ReservationController::class, 'history'])->name('reservations.history');
-    Route::get('/reservations/{reservableItem}/create', [ReservationController::class, 'create'])->name('reservations.create');
-    Route::post('/reservations/{reservableItem}',       [ReservationController::class, 'store'])->name('reservations.store');
+    Route::get('/reservations/{item}/create', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/reservations/{item}',       [ReservationController::class, 'store'])->name('reservations.store');
     Route::patch('/reservations/{reservation}/cancel',  [ReservationController::class, 'cancel'])->name('reservations.cancel');
 });
 
@@ -65,6 +65,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('faculty', FacultyController::class)->except(['show']);
+
+        // BUG FIX: items resource is now inside the 'admin.' name prefix group.
+        // This makes route names 'admin.items.index', 'admin.items.create', etc.
+        // Previously it was Route::resource('items', ...) outside any prefix,
+        // producing names like 'items.index' — but ItemController was calling
+        // route('admin.items.index'), causing a "route not found" crash.
         Route::resource('items', ItemController::class);
     });
 
