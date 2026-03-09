@@ -11,7 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
 {
-    private string $allowedDomain = 'kmitl.ac.th'; // 👈 change this
+    private string $allowedDomain = 'kmitl.ac.th';
 
     /**
      * Redirect the user to Google's login page.
@@ -22,7 +22,7 @@ class GoogleController extends Controller
     }
 
     /**
-     * Google redirects back after login.
+     * Google redirects back 
      */
     public function callback()
     {
@@ -35,7 +35,6 @@ class GoogleController extends Controller
 
         $email  = $googleUser->getEmail();
         $domain = substr(strrchr($email, "@"), 1);
-        // Determine role
         $adminEmail = config('services.google.admin_email');
         $role = ($email === $adminEmail) ? 'admin' : 'member';
 
@@ -65,16 +64,10 @@ class GoogleController extends Controller
      */
     public function logout(Request $request): RedirectResponse
     {
-        // Step 1: Log out from Laravel's auth system
+
         Auth::guard('web')->logout();
-
-        // Step 2: Destroy the session completely
         $request->session()->invalidate();
-
-        // Step 3: Regenerate CSRF token (security)
         $request->session()->regenerateToken();
-
-        // Step 4: Send them back to login page
         return redirect('/login')
             ->with('success', 'You have been logged out successfully.');
     }

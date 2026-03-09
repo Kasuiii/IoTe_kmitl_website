@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course; // ← capital C (PSR-4 standard)
+use App\Models\course;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -10,7 +10,7 @@ class FormController extends Controller
     // Show course list
     public function index()
     {
-        $courses = Course::orderBy('courseYear', 'desc')
+        $courses = course::orderBy('courseYear', 'desc')
             ->orderBy('courseID', 'asc')
             ->get();
 
@@ -37,7 +37,7 @@ class FormController extends Controller
             'courseDegree'   => 'required|string|max:255',
         ]);
 
-        Course::create($validated);
+        course::create($validated);
 
         return redirect()->route('course.index')
             ->with('success', 'Course added successfully!');
@@ -46,7 +46,7 @@ class FormController extends Controller
     // Show edit form
     public function edit($courseID)
     {
-        $course = Course::findOrFail($courseID);
+        $course = course::findOrFail($courseID);
         return view('courses.edit_course', compact('course'));
     }
 
@@ -63,7 +63,7 @@ class FormController extends Controller
             'courseDegree'   => 'required|string|max:255',
         ]);
 
-        $course = Course::findOrFail($courseID);
+        $course = course::findOrFail($courseID);
         $course->update($validated);
 
         return redirect()->route('course.index')
@@ -73,7 +73,7 @@ class FormController extends Controller
     // Delete course
     public function destroy($courseID)
     {
-        $course = Course::findOrFail($courseID);
+        $course = course::findOrFail($courseID);
         $course->delete();
 
         return redirect()->route('course.index')

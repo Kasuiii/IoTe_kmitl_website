@@ -287,9 +287,9 @@
                 </h1>
                 <p>IoT engineers at King Mongkut's Institute of Technology Ladkrabang.</p>
                 <div class="hero-btns gap-4 flex flex-wrap justify-center">
-                    <a href="{{ route('admission') }}" class="btn-primary">รับสมัครนักศึกษา 2569</a>
+                    <a href="{{ route('admission.index') }}" class="btn-primary">รับสมัครนักศึกษา 2569</a>
                     <a
-                        href="{{ route('faculty') }}"
+                        href="{{ route('faculty.index') }}"
                         style="
                             border: 2px solid rgba(255, 255, 255, 0.6);
                             color: #fff;
@@ -359,7 +359,7 @@
                 </h1>
                 <p>PhysIoT เท่ ๆ</p>
                 <div class="hero-btns gap-4 flex flex-wrap justify-center">
-                    <a href="{{ route('admission') }}" class="btn-primary">How to Apply</a>
+                    <a href="{{ route('admission.index') }}" class="btn-primary">How to Apply</a>
                     <a
                         href="#programs"
                         style="
@@ -833,7 +833,7 @@
             </p>
             <div class="gap-4 flex flex-wrap justify-center">
                 <a
-                    href="{{ route('admission') }}"
+                    href="{{ route('admission.index') }}"
                     style="
                         background: #fff;
                         color: var(--crimson);

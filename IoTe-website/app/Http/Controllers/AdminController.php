@@ -15,7 +15,7 @@ class AdminController extends Controller
         $adminCount = User::where('role', 'admin')->count();
         $memberCount = User::where('role', 'member')->count();
 
-        return view('admin.dashboard', compact('allUsers', 'adminCount', 'memberCount'));
+        return view('dashboard.admin', compact('allUsers', 'adminCount', 'memberCount'));
     }
 
     // Manage users list

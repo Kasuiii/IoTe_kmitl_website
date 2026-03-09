@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdmissionRound;
+use App\Models\AdmissionProject;
+use App\Models\FacultyMember;
 use Illuminate\Http\Request;
 use App\Models\course;
 
@@ -30,7 +33,10 @@ class PageController extends Controller
 
     public function admission()
     {
-        return view('admission');
+        $rounds = AdmissionRound::with('projects')   // eager load = load related projects in one query
+            ->orderBy('sort_order')
+            ->get();
+        return view('admission.index', compact('rounds'));
     }
 
     public function syllabus()
@@ -90,7 +96,27 @@ class PageController extends Controller
 
     public function faculty()
     {
-        return view('faculty');
+        $faculty = FacultyMember::orderBy('sort_order')->get()->map(function ($f) {
+
+            return [
+                'rank' => $f->rank ?? 0,
+                'rank_label' => $f->rank_label ?? $f->position,
+                'en' => $f->name_en,
+                'th' => $f->name_th,
+                'role' => $f->role,
+                'position' => $f->position,
+                'email' => $f->email,
+                'research_interests' => $f->research_interests ? explode(',', $f->research_interests) : [],
+                'img' => $f->photo_url,
+
+                // convert expertise string → array
+                'expertise' => $f->expertise
+                    ? explode(',', $f->expertise)
+                    : []
+            ];
+        });
+
+        return view('faculty.index', compact('faculty'));
     }
 
     public function addCourse()
@@ -107,7 +133,16 @@ class PageController extends Controller
     {
         return view('contact');
     }
-    // ─── Lab Data ────────────────────────────────────────────────────────────
+    public function about_us()
+    {
+        return view('about_us');
+    }
+    public function syllabusDual()
+    {
+        return view('syllabus.dual');
+    }
+
+    //Lab Data
 
     private function getLabsData(): array
     {

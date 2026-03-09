@@ -201,13 +201,19 @@
                             >
                                 Laboratories
                             </a>
-                            <a href="{{ route('admission') }}" class="nav-link {{ request()->routeIs('admission') ? 'active' : '' }}">
+                            <a
+                                href="{{ route('admission.index') }}"
+                                class="nav-link {{ request()->routeIs('admission.index') ? 'active' : '' }}"
+                            >
                                 Admission
                             </a>
                             <a href="{{ route('syllabus') }}" class="nav-link {{ request()->routeIs('syllabus') ? 'active' : '' }}">
                                 Syllabus
                             </a>
-                            <a href="{{ route('faculty') }}" class="nav-link {{ request()->routeIs('faculty') ? 'active' : '' }}">
+                            <a
+                                href="{{ route('faculty.index') }}"
+                                class="nav-link {{ request()->routeIs('faculty.index') ? 'active' : '' }}"
+                            >
                                 Faculty
                             </a>
 
@@ -233,7 +239,7 @@
                                 </a>
                             @endif
                         </div>
-                        <a href="{{ route('admission') }}" class="nav-cta md:inline-block hidden">Apply Now</a>
+                        <a href="{{ route('admission.index') }}" class="nav-cta md:inline-block hidden">Apply Now</a>
                     </div>
 
                     <!-- Mobile Toggle -->
@@ -249,13 +255,13 @@
             <div id="mobile-menu" class="space-y-1 bg-white px-4 py-3 md:hidden hidden border-t" style="border-color: var(--border)">
                 <a href="{{ route('home') }}" class="nav-link block w-full">Home</a>
                 <a href="{{ route('laboratories.index') }}" class="nav-link block w-full">Laboratories</a>
-                <a href="{{ route('admission') }}" class="nav-link block w-full">Admission</a>
+                <a href="{{ route('admission.index') }}" class="nav-link block w-full">Admission</a>
                 <a href="{{ route('syllabus') }}" class="nav-link block w-full">Syllabus</a>
-                <a href="{{ route('faculty') }}" class="nav-link block w-full">Faculty</a>
+                <a href="{{ route('faculty.index') }}" class="nav-link block w-full">Faculty</a>
 
                 <a href="{{ route('contact') }}" class="nav-link block w-full">Contact</a>
                 <a href="{{ route('login') }} " class="nav-link block w-full">Login</a>
-                <a href="{{ route('admission') }}" class="nav-cta mt-2 block text-center">Apply Now</a>
+                <a href="{{ route('admission.index') }}" class="nav-cta mt-2 block text-center">Apply Now</a>
             </div>
         </nav>
 
@@ -314,9 +320,9 @@
                             <li>
                                 <a href="{{ route('laboratories.index') }}" class="hover:text-white transition-colors">Laboratories</a>
                             </li>
-                            <li><a href="{{ route('admission') }}" class="hover:text-white transition-colors">Admission</a></li>
+                            <li><a href="{{ route('admission.index') }}" class="hover:text-white transition-colors">Admission</a></li>
                             <li><a href="{{ route('syllabus') }}" class="hover:text-white transition-colors">Syllabus</a></li>
-                            <li><a href="{{ route('faculty') }}" class="hover:text-white transition-colors">Faculty</a></li>
+                            <li><a href="{{ route('faculty.index') }}" class="hover:text-white transition-colors">Faculty</a></li>
                         </ul>
                     </div>
                     <div>

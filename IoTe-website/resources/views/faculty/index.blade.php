@@ -109,6 +109,87 @@
             color: #fff;
             font-family: 'Playfair Display', serif;
         }
+        .faculty-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .faculty-popup-card {
+            background: white;
+            border-radius: 14px;
+            max-width: 650px;
+            width: 90%;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 18px;
+            font-size: 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--muted);
+        }
+
+        .popup-header {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .faculty-avatar.large {
+            width: 110px;
+            height: 110px;
+        }
+
+        .popup-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .popup-th {
+            color: var(--crimson);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .popup-role {
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-email {
+            font-size: 0.85rem;
+            color: var(--crimson);
+        }
+
+        .popup-section h4 {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .expertise-tag {
+            font-size: 0.65rem;
+            background: var(--light);
+            color: var(--muted);
+            font-weight: 500;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+        }
     </style>
 @endpush
 
@@ -124,7 +205,7 @@
                 opacity: 0.7;
             "
         ></div>
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style="position: relative; z-index: 1">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto" style="position: relative; z-index: 1">
             <div class="max-w-2xl">
                 <span class="section-label" style="color: rgba(255, 163, 107, 0.9)">Our People</span>
                 <h1
@@ -145,7 +226,7 @@
                     คณาจารย์ภาควิชาวิศวกรรมไอโอทีและสารสนเทศ — Department of IoT and Information Engineering, KMITL
                 </p>
             </div>
-            <div class="mt-10 flex flex-wrap gap-6">
+            <div class="mt-10 gap-6 flex flex-wrap">
                 @foreach ([['17+', 'Faculty Members'], ['3', 'Full Professors'], ['5', 'Assoc. Professors'], ['E-12', 'Building']] as $stat)
                     <div style="text-align: center">
                         <div class="text-3xl font-black" style="font-family: 'Playfair Display', serif; color: #fff">{{ $stat[0] }}</div>
@@ -160,27 +241,27 @@
     <div
         style="background: var(--light); border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: 64px; z-index: 40"
     >
-        <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl gap-3 px-4 sm:px-6 lg:px-8 mx-auto flex flex-wrap items-center">
             <span class="mr-1 text-sm font-medium" style="color: var(--muted)">Filter by:</span>
             <button class="filter-btn active" data-filter="all">All Faculty</button>
             <button class="filter-btn" data-filter="professor">Professor / ศ.</button>
-            <button class="filter-btn" data-filter="associate">Assoc. Prof. / รศ.</button>
-            <button class="filter-btn" data-filter="assistant">Asst. Prof. / ผศ.</button>
+            <button class="filter-btn" data-filter="assoc_prof">Assoc. Prof. / รศ.</button>
+            <button class="filter-btn" data-filter="asst_prof">Asst. Prof. / ผศ.</button>
             <button class="filter-btn" data-filter="lecturer">Lecturer / อาจารย์</button>
         </div>
     </div>
 
     <!-- DEPARTMENT HEAD HIGHLIGHT -->
     <section style="padding: 5rem 0 0; background: #fff">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <span class="section-label">Leadership</span>
             <h2 class="section-title mb-8" style="font-size: 2rem">Department Head</h2>
 
             <div
-                class="mb-16 grid grid-cols-1 items-center gap-12 lg:grid-cols-2"
+                class="mb-16 gap-12 lg:grid-cols-2 grid grid-cols-1 items-center"
                 style="background: var(--light); border-radius: 24px; padding: 3rem; border: 1px solid var(--border)"
             >
-                <div class="flex items-center gap-6">
+                <div class="gap-6 flex items-center">
                     <div
                         style="
                             width: 120px;
@@ -221,7 +302,7 @@
                         <li>วศ.ม. วิศวกรรมสารสนเทศ — KMITL</li>
                         <li>D.Eng. Science and Technology — Tokai University, Japan</li>
                     </ul>
-                    <div class="flex flex-wrap gap-2">
+                    <div class="gap-2 flex flex-wrap">
                         @foreach (['Web Application', 'Mobile Application', 'Information Security'] as $t)
                             <span class="tag" style="font-size: 0.7rem">{{ $t }}</span>
                         @endforeach
@@ -233,183 +314,189 @@
 
     <!-- FULL FACULTY GRID -->
     <section style="padding: 2rem 0 7rem; background: #fff">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <span class="section-label">Full Faculty</span>
             <h2 class="section-title mb-3" style="font-size: 2rem">คณาจารย์ประจำภาควิชา</h2>
             <div class="accent-line mb-8"></div>
 
-            @php
+            {{--
+                @php
                 $faculty = [
-                    // ─── Professors / ศ. ───
-                    [
-                        'en' => 'Prof.Dr. Apirat Siritaratiwat',
-                        'th' => 'ศ.ดร.อภิรัฐ ศิริธราธิวัตร',
-                        'rank' => 'professor',
-                        'rank_label' => 'Professor / ศ.',
-                        'role' => 'รองหัวหน้าภาควิชา (ฝ่ายวิจัยและนวัตกรรม)',
-                        'email' => '—',
-                        'expertise' => ['Research & Innovation'],
-                        'img' => null,
-                    ],
-                    [
-                        'en' => 'Prof.Dr. Pitikhate Sooraksa',
-                        'th' => 'ศ.ดร.ปิติเขต สู้รักษา',
-                        'rank' => 'professor',
-                        'rank_label' => 'Professor / ศ.',
-                        'role' => 'อาจารย์ประจำหลักสูตร',
-                        'email' => 'pitikhate.so@kmitl.ac.th',
-                        'expertise' => ['IT Automation', 'Industrial Informatics'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจปิติเขต.jpg',
-                    ],
-                    // ─── Assoc. Professors / รศ. ───
-                    [
-                        'en' => 'Assoc.Prof.Dr. Boonchana Purahong',
-                        'th' => 'รศ.ดร.บุณย์ชนะ ภู่ระหงษ์',
-                        'rank' => 'associate',
-                        'rank_label' => 'Assoc. Prof. / รศ.',
-                        'role' => 'ประธานหลักสูตรฯ',
-                        'email' => 'boonchana.pu@kmitl.ac.th',
-                        'expertise' => ['Microprocessor', 'Microcontroller', 'Robotics', 'IoT & Smart System'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/kpboonch-251x300.jpg',
-                    ],
-                    [
-                        'en' => 'Assoc.Prof.Dr. Attasit Lasakul',
-                        'th' => 'รศ.ดร.อรรถสิทธิ์ หล่าสกุล',
-                        'rank' => 'associate',
-                        'rank_label' => 'Assoc. Prof. / รศ.',
-                        'role' => 'อาจารย์พิเศษ',
-                        'email' => 'attasit.la@kmitl.ac.th',
-                        'expertise' => ['Digital Processing', 'Image Watermarking', 'Embedded Systems', 'Machine Vision'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจอรรถ.jpg',
-                    ],
-                    // ─── Asst. Professors / ผศ. ───
-                    [
-                        'en' => 'Asst.Prof.Dr. Vanvisa Chutchavong',
-                        'th' => 'ผศ.ดร.วันวิสา ชัชวงษ์',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'รองหัวหน้าภาควิชา (ฝ่ายการเงิน)',
-                        'email' => 'vanvisa.ch@kmitl.ac.th',
-                        'expertise' => ['Electronic', 'Bernstein Filter', 'Railway Signaling', 'Pattern Recognition'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจไก่.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof.Dr. Natchanai Roongmuanpha',
-                        'th' => 'ผศ.ดร.นัชนัยน์ รุ่งเหมือนฟ้า',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'รองหัวหน้าภาควิชา (ฝ่ายต่างประเทศ)',
-                        'email' => 'natchanai.ro@kmitl.ac.th',
-                        'expertise' => ['Immittance Simulators', 'Active Analog Filters', 'Oscillator Design', 'Chaotic Circuits'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจโอม.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof.Dr. Kleddao Satcharoen',
-                        'th' => 'ผศ.ดร.เกล็ดดาว สัตย์เจริญ',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์ประจำภาควิชา',
-                        'email' => 'kleddao.sa@kmitl.ac.th',
-                        'expertise' => ['Human Computer Interaction', 'User Interfaces'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจฝน.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof. Nitjaree Satayarak',
-                        'th' => 'ผศ.นิจจารีย์ สัตยารักษ์',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการนักศึกษา)',
-                        'email' => 'nitjaree.sa@kmitl.ac.th',
-                        'expertise' => ['Software Engineering', 'Distributed Testing System'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจนิจ.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof.Dr. Thanavit Anuwongpinit',
-                        'th' => 'ผศ.ดร.ธนวิชญ์ อนุวงศ์พินิจ',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'รองหัวหน้าภาควิชา (ฝ่ายวิชาการ)',
-                        'email' => 'thanavit.an@kmitl.ac.th',
-                        'expertise' => ['Internet of Things', 'Embedded Systems', 'Railway Signaling', 'Microprocessor'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/cropped-อจเหน่ง-2.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof.Dr. Auttapon Pomsathit',
-                        'th' => 'ผศ.ดร.อรรถพล ป้อมสถิตย์',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์ประจำหลักสูตร',
-                        'email' => 'auttapon.po@kmitl.ac.th',
-                        'expertise' => ['Cyber Security', 'Internetworking Design', 'Information Security'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจเป็ด.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof.Dr. Panarat Cherntanomwong',
-                        'th' => 'ผศ.ดร.พนารัตน์ เชิญถนอมวงศ์',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์ประจำหลักสูตร',
-                        'email' => 'panarat.ch@kmitl.ac.th',
-                        'expertise' => ['Telecommunication', 'Zigbee', 'Indoor Positioning'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจพนารัต.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof.Dr. Sutheera Puntheeranurak',
-                        'th' => 'ผศ.ดร.สุธีรา พันธ์ธีรานุรักษ์',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์ประจำหลักสูตร',
-                        'email' => 'sutheera.pu@kmitl.ac.th',
-                        'expertise' => ['Data Mining', 'Big Data'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจสุธีรา.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof. Sorapong Wachirarattanapornkul',
-                        'th' => 'ผศ.สรพงษ์ วชิรรัตนพรกุล',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์ผู้รับผิดชอบหลักสูตร',
-                        'email' => 'sorapong.wa@kmitl.ac.th',
-                        'expertise' => ['Analog & Digital Filter', 'Embedded System', 'RFID', 'Pattern Recognition'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจอัต.jpg',
-                    ],
-                    [
-                        'en' => 'Asst.Prof. Dolchai Sookcharoenphol',
-                        'th' => 'ผศ.ดลชัย สุขเจริญผล',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์ประจำหลักสูตร',
-                        'email' => 'dolchai.so@kmitl.ac.th',
-                        'expertise' => ['Digital Communications', 'Digital Signal Processing', 'Digital Audio Engineering'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจดล.png',
-                    ],
-                    [
-                        'en' => 'Asst.Prof. Paisan Sithiyopasakul',
-                        'th' => 'ผศ.ไพศาล สิทธิโยภาสกุล',
-                        'rank' => 'assistant',
-                        'rank_label' => 'Asst. Prof. / ผศ.',
-                        'role' => 'อาจารย์พิเศษ',
-                        'email' => 'paisan-si@kmitl.ac.th',
-                        'expertise' => ['Wireless Communication', 'Microprocessor Applications', 'Digital Filter'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจไพศาล.jpg',
-                    ],
-                    // ─── Lecturers / อาจารย์ ───
-                    [
-                        'en' => 'Dr. Suwilai Phumpho',
-                        'th' => 'ดร.สุวิไล พุ่มโพธิ์',
-                        'rank' => 'lecturer',
-                        'rank_label' => 'Lecturer / ดร.',
-                        'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการภายนอก)',
-                        'email' => 'suwilai.ph@kmitl.ac.th',
-                        'expertise' => ['Immittance Function Simulators'],
-                        'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2025/10/images.jpg',
-                    ],
+                // ─── Professors / ศ. ───
+                [
+                'en' => 'Prof.Dr. Apirat Siritaratiwat',
+                'th' => 'ศ.ดร.อภิรัฐ ศิริธราธิวัตร',
+                'rank' => 'professor',
+                'rank_label' => 'Professor / ศ.',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายวิจัยและนวัตกรรม)',
+                'email' => '—',
+                'expertise' => ['Research & Innovation'],
+                'img' => null,
+                ],
+                [
+                'en' => 'Prof.Dr. Pitikhate Sooraksa',
+                'th' => 'ศ.ดร.ปิติเขต สู้รักษา',
+                'rank' => 'professor',
+                'rank_label' => 'Professor / ศ.',
+                'role' => 'อาจารย์ประจำหลักสูตร',
+                'email' => 'pitikhate.so@kmitl.ac.th',
+                'expertise' => ['IT Automation', 'Industrial Informatics'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจปิติเขต.jpg',
+                ],
+                // ─── Assoc. Professors / รศ. ───
+                [
+                'en' => 'Assoc.Prof.Dr. Boonchana Purahong',
+                'th' => 'รศ.ดร.บุณย์ชนะ ภู่ระหงษ์',
+                'rank' => 'associate',
+                'rank_label' => 'Assoc. Prof. / รศ.',
+                'role' => 'ประธานหลักสูตรฯ',
+                'email' => 'boonchana.pu@kmitl.ac.th',
+                'expertise' => ['Microprocessor', 'Microcontroller', 'Robotics', 'IoT & Smart System'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/kpboonch-251x300.jpg',
+                ],
+                [
+                'en' => 'Assoc.Prof.Dr. Attasit Lasakul',
+                'th' => 'รศ.ดร.อรรถสิทธิ์ หล่าสกุล',
+                'rank' => 'associate',
+                'rank_label' => 'Assoc. Prof. / รศ.',
+                'role' => 'อาจารย์พิเศษ',
+                'email' => 'attasit.la@kmitl.ac.th',
+                'expertise' => ['Digital Processing', 'Image Watermarking', 'Embedded Systems', 'Machine Vision'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจอรรถ.jpg',
+                ],
+                // ─── Asst. Professors / ผศ. ───
+                [
+                'en' => 'Asst.Prof.Dr. Vanvisa Chutchavong',
+                'th' => 'ผศ.ดร.วันวิสา ชัชวงษ์',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายการเงิน)',
+                'email' => 'vanvisa.ch@kmitl.ac.th',
+                'expertise' => ['Electronic', 'Bernstein Filter', 'Railway Signaling', 'Pattern Recognition'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจไก่.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof.Dr. Natchanai Roongmuanpha',
+                'th' => 'ผศ.ดร.นัชนัยน์ รุ่งเหมือนฟ้า',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายต่างประเทศ)',
+                'email' => 'natchanai.ro@kmitl.ac.th',
+                'expertise' => ['Immittance Simulators', 'Active Analog Filters', 'Oscillator Design', 'Chaotic Circuits'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจโอม.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof.Dr. Kleddao Satcharoen',
+                'th' => 'ผศ.ดร.เกล็ดดาว สัตย์เจริญ',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์ประจำภาควิชา',
+                'email' => 'kleddao.sa@kmitl.ac.th',
+                'expertise' => ['Human Computer Interaction', 'User Interfaces'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจฝน.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof. Nitjaree Satayarak',
+                'th' => 'ผศ.นิจจารีย์ สัตยารักษ์',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการนักศึกษา)',
+                'email' => 'nitjaree.sa@kmitl.ac.th',
+                'expertise' => ['Software Engineering', 'Distributed Testing System'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจนิจ.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof.Dr. Thanavit Anuwongpinit',
+                'th' => 'ผศ.ดร.ธนวิชญ์ อนุวงศ์พินิจ',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายวิชาการ)',
+                'email' => 'thanavit.an@kmitl.ac.th',
+                'expertise' => ['Internet of Things', 'Embedded Systems', 'Railway Signaling', 'Microprocessor'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/cropped-อจเหน่ง-2.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof.Dr. Auttapon Pomsathit',
+                'th' => 'ผศ.ดร.อรรถพล ป้อมสถิตย์',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์ประจำหลักสูตร',
+                'email' => 'auttapon.po@kmitl.ac.th',
+                'expertise' => ['Cyber Security', 'Internetworking Design', 'Information Security'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจเป็ด.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof.Dr. Panarat Cherntanomwong',
+                'th' => 'ผศ.ดร.พนารัตน์ เชิญถนอมวงศ์',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์ประจำหลักสูตร',
+                'email' => 'panarat.ch@kmitl.ac.th',
+                'expertise' => ['Telecommunication', 'Zigbee', 'Indoor Positioning'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจพนารัต.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof.Dr. Sutheera Puntheeranurak',
+                'th' => 'ผศ.ดร.สุธีรา พันธ์ธีรานุรักษ์',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์ประจำหลักสูตร',
+                'email' => 'sutheera.pu@kmitl.ac.th',
+                'expertise' => ['Data Mining', 'Big Data'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจสุธีรา.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof. Sorapong Wachirarattanapornkul',
+                'th' => 'ผศ.สรพงษ์ วชิรรัตนพรกุล',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์ผู้รับผิดชอบหลักสูตร',
+                'email' => 'sorapong.wa@kmitl.ac.th',
+                'expertise' => ['Analog & Digital Filter', 'Embedded System', 'RFID', 'Pattern Recognition'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจอัต.jpg',
+                ],
+                [
+                'en' => 'Asst.Prof. Dolchai Sookcharoenphol',
+                'th' => 'ผศ.ดลชัย สุขเจริญผล',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์ประจำหลักสูตร',
+                'email' => 'dolchai.so@kmitl.ac.th',
+                'expertise' => ['Digital Communications', 'Digital Signal Processing', 'Digital Audio Engineering'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/01/อจดล.png',
+                ],
+                [
+                'en' => 'Asst.Prof. Paisan Sithiyopasakul',
+                'th' => 'ผศ.ไพศาล สิทธิโยภาสกุล',
+                'rank' => 'assistant',
+                'rank_label' => 'Asst. Prof. / ผศ.',
+                'role' => 'อาจารย์พิเศษ',
+                'email' => 'paisan-si@kmitl.ac.th',
+                'expertise' => ['Wireless Communication', 'Microprocessor Applications', 'Digital Filter'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2024/07/อจไพศาล.jpg',
+                ],
+                // ─── Lecturers / อาจารย์ ───
+                [
+                'en' => 'Dr. Suwilai Phumpho',
+                'th' => 'ดร.สุวิไล พุ่มโพธิ์',
+                'rank' => 'lecturer',
+                'rank_label' => 'Lecturer / ดร.',
+                'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการภายนอก)',
+                'email' => 'suwilai.ph@kmitl.ac.th',
+                'expertise' => ['Immittance Function Simulators'],
+                'img' => 'http://www.iote.kmitl.ac.th/wp-content/uploads/2025/10/images.jpg',
+                ],
                 ];
-            @endphp
+                @endphp
+            --}}
 
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4" id="faculty-grid">
+            <div class="gap-6 md:grid-cols-2 lg:grid-cols-4 grid grid-cols-1" id="faculty-grid">
                 @foreach ($faculty as $member)
-                    <div class="faculty-card faculty-item" data-rank="{{ $member['rank'] }}">
+                    <div
+                        class="faculty-card faculty-item"
+                        data-rank="{{ $member['role'] }}"
+                        onclick="openFaculty('{{ Str::slug($member['en']) }}')"
+                    >
                         <div class="faculty-avatar">
                             @if ($member['img'])
                                 <img
@@ -429,7 +516,7 @@
                                 </div>
                             @endif
                             <div class="faculty-avatar-overlay">
-                                <div class="flex gap-2">
+                                <div class="gap-2 flex">
                                     <a href="mailto:{{ $member['email'] }}" class="social-link" title="Email">
                                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path
@@ -444,7 +531,7 @@
                             </div>
                         </div>
                         <div style="padding: 1.25rem">
-                            <span class="role-badge">{{ $member['rank_label'] }}</span>
+                            <span class="role-badge">{{ $member['role'] }}</span>
                             <h3
                                 class="mb-1 text-sm leading-tight font-bold"
                                 style="color: var(--dark); font-family: 'Playfair Display', serif"
@@ -452,9 +539,9 @@
                                 {{ $member['en'] }}
                             </h3>
                             <p class="mb-1 text-xs" style="color: var(--crimson); font-weight: 500">{{ $member['th'] }}</p>
-                            <p class="mb-3 text-xs" style="color: var(--muted); font-style: italic">{{ $member['role'] }}</p>
-                            <div class="flex flex-wrap gap-1">
-                                @foreach (array_slice($member['expertise'], 0, 3) as $e)
+                            <p class="mb-3 text-xs" style="color: var(--muted); font-style: italic">{{ $member['position'] }}</p>
+                            <div class="gap-1 flex flex-wrap">
+                                @foreach (array_slice($member['research_interests'], 0, 3) as $e)
                                     <span
                                         style="
                                             font-size: 0.62rem;
@@ -471,6 +558,49 @@
                             </div>
                         </div>
                     </div>
+                    <div id="faculty-modal-{{ Str::slug($member['en']) }}" class="faculty-popup">
+                        <div class="faculty-popup-card">
+                            <button class="popup-close" onclick="closeFaculty('{{ Str::slug($member['en']) }}')">×</button>
+
+                            <div class="popup-header">
+                                <div class="faculty-avatar large">
+                                    @if ($member['img'])
+                                        <img src="{{ $member['img'] }}" alt="{{ $member['en'] }}" />
+                                    @else
+                                        <div class="avatar-placeholder">
+                                            {{ strtoupper(substr($member['en'], strpos($member['en'], ' ') + 1, 1)) }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="popup-info">
+                                    <span class="role-badge">{{ $member['rank_label'] }}</span>
+
+                                    <h2 class="popup-name">
+                                        {{ $member['en'] }}
+                                    </h2>
+
+                                    <p class="popup-th">{{ $member['th'] }}</p>
+
+                                    <p class="popup-role">{{ $member['role'] }}</p>
+
+                                    <a href="mailto:{{ $member['email'] }}" class="popup-email">
+                                        {{ $member['email'] }}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="popup-section">
+                                <h4>Expertise</h4>
+
+                                <div class="gap-2 flex flex-wrap">
+                                    @foreach ($member['research_interests'] as $e)
+                                        <span class="expertise-tag">{{ $e }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -478,10 +608,10 @@
 
     <!-- STAFF -->
     <section style="padding: 4rem 0 6rem; background: var(--light); border-top: 1px solid var(--border)">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <span class="section-label">Department Staff</span>
             <h2 class="section-title mb-8" style="font-size: 2rem">บุคลากรภาควิชา</h2>
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="gap-4 md:grid-cols-2 grid grid-cols-1">
                 @foreach ([
                         ['name' => 'Mr. Thanat Jomjaiakchon (นายธนาตย์ จอมใจเอกชน)', 'role' => 'เจ้าหน้าที่วิศวกร'],
                         ['name' => 'Mr. Teerasit Thotong (นายธีรสิทธิ์ โท้ทอง)', 'role' => 'เจ้าหน้าที่วิศวกร']
@@ -532,12 +662,12 @@
 
     <!-- CONTACT CTA -->
     <section style="background: linear-gradient(135deg, var(--crimson), var(--orange)); padding: 4rem 0">
-        <div class="mx-auto max-w-3xl px-4 text-center">
+        <div class="max-w-3xl px-4 mx-auto text-center">
             <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 1rem">
                 ติดต่อภาควิชา
             </h2>
             <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 2rem">ภาควิชาวิศวกรรมไอโอทีและสารสนเทศ อาคาร E-12 ชั้น 11 สจล.</p>
-            <div class="flex flex-wrap justify-center gap-4">
+            <div class="gap-4 flex flex-wrap justify-center">
                 <a
                     href="mailto:iote@kmitl.ac.th"
                     style="
@@ -586,6 +716,21 @@
                         item.style.display = 'none';
                     }
                 });
+            });
+        });
+        function openFaculty(id) {
+            document.getElementById('faculty-modal-' + id).style.display = 'flex';
+        }
+
+        function closeFaculty(id) {
+            document.getElementById('faculty-modal-' + id).style.display = 'none';
+        }
+
+        window.addEventListener('click', function (e) {
+            document.querySelectorAll('.faculty-popup').forEach((modal) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
             });
         });
     </script>

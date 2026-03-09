@@ -199,7 +199,7 @@
                 View Official Curriculum ↗
             </a>
             <a
-                href="{{ route('admission') }}"
+                href="{{ route('admission.index') }}"
                 style="
                     display: inline-flex;
                     align-items: center;
