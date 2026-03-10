@@ -13,17 +13,10 @@ class GoogleController extends Controller
 {
     private string $allowedDomain = 'kmitl.ac.th';
 
-    /**
-     * Redirect the user to Google's login page.
-     */
     public function redirect()
     {
         return Socialite::driver('google')->redirect();
     }
-
-    /**
-     * Google redirects back 
-     */
     public function callback()
     {
         try {
@@ -35,8 +28,8 @@ class GoogleController extends Controller
 
         $email  = $googleUser->getEmail();
         $domain = substr(strrchr($email, "@"), 1);
-        $adminEmail = config('services.google.admin_email');
-        $role = ($email === $adminEmail) ? 'admin' : 'member';
+        $adminEmails = explode(',', config('services.google.admin_emails'));
+        $role = in_array($email, $adminEmails) ? 'admin' : 'member';
 
         if ($domain !== $this->allowedDomain) {
             return redirect('/login')
@@ -49,7 +42,7 @@ class GoogleController extends Controller
             [
                 'name'   => $googleUser->getName(),
                 'email'  => $email,
-                'role'   => $googleUser->getEmail() === config('services.google.admin_email') ? 'admin' : 'member',
+                'role'   => $role,
                 'avatar' => $googleUser->getAvatar(),
             ]
         );
@@ -59,9 +52,6 @@ class GoogleController extends Controller
         return redirect()->intended('/dashboard');
     }
 
-    /**
-     * Log the user out.
-     */
     public function logout(Request $request): RedirectResponse
     {
 

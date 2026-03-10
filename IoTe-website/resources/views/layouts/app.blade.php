@@ -32,7 +32,6 @@
                 font-family: 'Playfair Display', serif;
             }
 
-            /* Navbar */
             #main-navbar {
                 background: rgba(255, 255, 255, 0.96);
                 backdrop-filter: blur(12px);
@@ -75,8 +74,6 @@
                 background: var(--orange);
                 transform: translateY(-1px);
             }
-
-            /* Buttons */
             .btn-primary {
                 display: inline-block;
                 background: var(--crimson);
@@ -107,8 +104,6 @@
                 background: var(--crimson);
                 color: #fff;
             }
-
-            /* Section */
             .section-label {
                 display: inline-block;
                 font-size: 0.75rem;
@@ -130,8 +125,6 @@
                     font-size: 2.75rem;
                 }
             }
-
-            /* Card */
             .card {
                 background: #fff;
                 border: 1px solid var(--border);
@@ -145,8 +138,6 @@
                 box-shadow: 0 12px 36px rgba(114, 10, 0, 0.1);
                 transform: translateY(-4px);
             }
-
-            /* Tag */
             .tag {
                 display: inline-block;
                 background: rgba(227, 82, 5, 0.1);
@@ -158,8 +149,6 @@
                 padding: 0.25rem 0.75rem;
                 border-radius: 20px;
             }
-
-            /* Divider accent */
             .accent-line {
                 width: 56px;
                 height: 4px;
@@ -349,12 +338,10 @@
 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
         <script>
-            // Navbar scroll effect
             window.addEventListener('scroll', () => {
                 const nav = document.getElementById('main-navbar');
                 nav.classList.toggle('scrolled', window.scrollY > 20);
             });
-            // Mobile menu toggle
             document.getElementById('mobile-menu-btn').addEventListener('click', () => {
                 document.getElementById('mobile-menu').classList.toggle('hidden');
             });

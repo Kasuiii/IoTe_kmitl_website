@@ -17,14 +17,11 @@ class AdmissionProject extends Model
         'notes',
         'sort_order',
     ];
-
-    // Many projects → one round (the "belongs to" side)
     public function round()
     {
         return $this->belongsTo(AdmissionRound::class, 'admission_round_id');
     }
 
-    // Parse requirements stored as comma-separated text into an array
     public function getRequirementsArrayAttribute(): array
     {
         if (!$this->requirements) return [];

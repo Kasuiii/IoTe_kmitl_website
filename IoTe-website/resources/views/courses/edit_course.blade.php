@@ -35,7 +35,6 @@
 
             <div>
                 <label>Course ID</label>
-                {{-- Disabled so it can't be changed --}}
                 <input type="text" value="{{ $course->courseID }}" class="rounded px-3 py-2 bg-gray-100 w-full border" disabled />
             </div>
 

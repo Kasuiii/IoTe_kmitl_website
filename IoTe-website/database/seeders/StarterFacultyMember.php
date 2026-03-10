@@ -12,9 +12,9 @@ class StarterFacultyMember extends Seeder
         $faculty = [
 
             [
-                'prefix' => 'Professor / ศ.',
-                'name_en' => 'Prof.Dr. Apirat Siritaratiwat',
-                'name_th' => 'ศ.ดร.อภิรัฐ ศิริธราธิวัตร',
+                'prefix' => 'ศ.',
+                'name_en' => 'Apirat Siritaratiwat',
+                'name_th' => 'อภิรัฐ ศิริธราธิวัตร',
                 'position' => 'professor',
                 'role' => 'รองหัวหน้าภาควิชา (ฝ่ายวิจัยและนวัตกรรม)',
                 'email' => null,
@@ -23,9 +23,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Professor / ศ.',
-                'name_en' => 'Prof.Dr. Pitikhate Sooraksa',
-                'name_th' => 'ศ.ดร.ปิติเขต สู้รักษา',
+                'prefix' => 'ศ.',
+                'name_en' => 'Pitikhate Sooraksa',
+                'name_th' => 'ปิติเขต สู้รักษา',
                 'position' => 'professor',
                 'role' => 'อาจารย์ประจำหลักสูตร',
                 'email' => 'pitikhate.so@kmitl.ac.th',
@@ -34,9 +34,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Assoc. Prof. / รศ.',
-                'name_en' => 'Assoc.Prof.Dr. Boonchana Purahong',
-                'name_th' => 'รศ.ดร.บุณย์ชนะ ภู่ระหงษ์',
+                'prefix' => 'รศ.',
+                'name_en' => 'Boonchana Purahong',
+                'name_th' => 'บุณย์ชนะ ภู่ระหงษ์',
                 'position' => 'associate',
                 'role' => 'ประธานหลักสูตรฯ',
                 'email' => 'boonchana.pu@kmitl.ac.th',
@@ -45,9 +45,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Assoc. Prof. / รศ.',
-                'name_en' => 'Assoc.Prof.Dr. Attasit Lasakul',
-                'name_th' => 'รศ.ดร.อรรถสิทธิ์ หล่าสกุล',
+                'prefix' => 'รศ.',
+                'name_en' => 'Attasit Lasakul',
+                'name_th' => 'อรรถสิทธิ์ หล่าสกุล',
                 'position' => 'associate',
                 'role' => 'อาจารย์พิเศษ',
                 'email' => 'attasit.la@kmitl.ac.th',
@@ -56,9 +56,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Asst. Prof. / ผศ.',
-                'name_en' => 'Asst.Prof.Dr. Vanvisa Chutchavong',
-                'name_th' => 'ผศ.ดร.วันวิสา ชัชวงษ์',
+                'prefix' => 'ผศ.',
+                'name_en' => 'Vanvisa Chutchavong',
+                'name_th' => 'วันวิสา ชัชวงษ์',
                 'position' => 'assistant',
                 'role' => 'รองหัวหน้าภาควิชา (ฝ่ายการเงิน)',
                 'email' => 'vanvisa.ch@kmitl.ac.th',
@@ -67,9 +67,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Asst. Prof. / ผศ.',
-                'name_en' => 'Asst.Prof.Dr. Natchanai Roongmuanpha',
-                'name_th' => 'ผศ.ดร.นัชนัยน์ รุ่งเหมือนฟ้า',
+                'prefix' => 'ผศ.',
+                'name_en' => 'Natchanai Roongmuanpha',
+                'name_th' => 'นัชนัยน์ รุ่งเหมือนฟ้า',
                 'position' => 'assistant',
                 'role' => 'รองหัวหน้าภาควิชา (ฝ่ายต่างประเทศ)',
                 'email' => 'natchanai.ro@kmitl.ac.th',
@@ -78,9 +78,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Asst. Prof. / ผศ.',
-                'name_en' => 'Asst.Prof.Dr. Kleddao Satcharoen',
-                'name_th' => 'ผศ.ดร.เกล็ดดาว สัตย์เจริญ',
+                'prefix' => 'ผศ.',
+                'name_en' => 'Kleddao Satcharoen',
+                'name_th' => 'เกล็ดดาว สัตย์เจริญ',
                 'position' => 'assistant',
                 'role' => 'อาจารย์ประจำภาควิชา',
                 'email' => 'kleddao.sa@kmitl.ac.th',
@@ -89,9 +89,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Asst. Prof. / ผศ.',
-                'name_en' => 'Asst.Prof. Nitjaree Satayarak',
-                'name_th' => 'ผศ.นิจจารีย์ สัตยารักษ์',
+                'prefix' => 'ผศ.',
+                'name_en' => 'Nitjaree Satayarak',
+                'name_th' => 'นิจจารีย์ สัตยารักษ์',
                 'position' => 'assistant',
                 'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการนักศึกษา)',
                 'email' => 'nitjaree.sa@kmitl.ac.th',
@@ -100,9 +100,9 @@ class StarterFacultyMember extends Seeder
             ],
 
             [
-                'prefix' => 'Lecturer / ดร.',
-                'name_en' => 'Dr. Suwilai Phumpho',
-                'name_th' => 'ดร.สุวิไล พุ่มโพธิ์',
+                'prefix' => 'ดร.',
+                'name_en' => 'Suwilai Phumpho',
+                'name_th' => 'สุวิไล พุ่มโพธิ์',
                 'position' => 'lecturer',
                 'role' => 'รองหัวหน้าภาควิชา (ฝ่ายกิจการภายนอก)',
                 'email' => 'suwilai.ph@kmitl.ac.th',

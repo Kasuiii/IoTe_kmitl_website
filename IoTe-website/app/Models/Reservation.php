@@ -24,10 +24,6 @@ class Reservation extends Model
         'actual_return_date' => 'date',
     ];
 
-    // Status flow:
-    // pending → approved → borrowed → returned
-    //         → rejected
-    // pending → cancelled  (by student)
     public static array $statusLabels = [
         'pending'   => ['label' => 'รอการอนุมัติ', 'color' => '#f97316'],
         'approved'  => ['label' => 'อนุมัติแล้ว',  'color' => '#3b82f6'],

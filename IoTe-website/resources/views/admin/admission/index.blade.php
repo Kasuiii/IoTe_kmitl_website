@@ -1,9 +1,3 @@
-{{--
-    ═══════════════════════════════════════════════════════════
-    FILE: resources/views/admin/admission/index.blade.php
-    Shows all rounds and nested projects, with CRUD buttons
-    ════════════════════════════════════════════════════════════
---}}
 @extends('layouts.app')
 @section('title', 'Admin · Admission Management')
 

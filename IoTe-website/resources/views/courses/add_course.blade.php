@@ -7,8 +7,6 @@
 @section('content')
     <div class="max-w-xl mt-8 p-6 bg-white rounded-lg shadow mx-auto">
         <h2 class="text-2xl font-bold mb-6 text-center">Add Course</h2>
-
-        {{-- Show validation errors --}}
         @if ($errors->any())
             <div style="background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 16px">
                 <ul style="margin: 0; padding-left: 16px">
@@ -24,14 +22,13 @@
 
             <div>
                 <label>Year</label>
-                <select name="courseYear" type="number" value="{{ old('courseYear') }}" class="rounded px-3 py-2 w-full border" required>
-                    <option selected>Choose a year</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                <select name="courseYear" class="rounded px-3 py-2 w-full border" required>
+                    <option value="" @selected(! old('courseYear'))>Choose a year</option>
+                    <option value="1" @selected(old('courseYear') == '1')>1</option>
+                    <option value="2" @selected(old('courseYear') == '2')>2</option>
+                    <option value="3" @selected(old('courseYear') == '3')>3</option>
+                    <option value="4" @selected(old('courseYear') == '4')>4</option>
                 </select>
-                {{-- <input name="courseYear" type="number" value="{{ old('courseYear') }}" class="rounded px-3 py-2 w-full border" required /> --}}
             </div>
 
             <div>
@@ -46,39 +43,24 @@
 
             <div>
                 <label>Credits</label>
-                <select
-                    name="courseCredits"
-                    type="number"
-                    value="{{ old('courseCredits') }}"
-                    class="rounded px-3 py-2 w-full border"
-                    required
-                >
-                    <option selected>Choose a Credits</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                {{-- FIX: was "courseCredits" (with s) — controller & model expect "courseCredit" --}}
+                <select name="courseCredit" class="rounded px-3 py-2 w-full border" required>
+                    <option value="" @selected(! old('courseCredit'))>Choose a Credits</option>
+                    <option value="1" @selected(old('courseCredit') == '1')>1</option>
+                    <option value="2" @selected(old('courseCredit') == '2')>2</option>
+                    <option value="3" @selected(old('courseCredit') == '3')>3</option>
                 </select>
-                {{--
-                    <input
-                    name="courseCredit"
-                    type="number"
-                    value="{{ old('courseCredit') }}"
-                    class="rounded px-3 py-2 w-full border"
-                    required
-                    />
-                --}}
             </div>
 
             <div>
                 <label>Type</label>
-                <select name="courseType" type="text" value="{{ old('courseType') }}" class="rounded px-3 py-2 w-full border" required>
-                    <option selected>Choose a course type</option>
-                    <option value="Core">Core</option>
-                    <option value="Elective">Elective</option>
-                    <option value="Lab">Lab</option>
-                    <option value="Gen">General</option>
+                <select name="courseType" class="rounded px-3 py-2 w-full border" required>
+                    <option value="" @selected(! old('courseType'))>Choose a course type</option>
+                    <option value="Core" @selected(old('courseType') == 'Core')>Core</option>
+                    <option value="Elective" @selected(old('courseType') == 'Elective')>Elective</option>
+                    <option value="Lab" @selected(old('courseType') == 'Lab')>Lab</option>
+                    <option value="Gen" @selected(old('courseType') == 'Gen')>General</option>
                 </select>
-                {{-- <input name="courseType" type="text" value="{{ old('courseType') }}" class="rounded px-3 py-2 w-full border" required /> --}}
             </div>
 
             <div>
@@ -88,44 +70,21 @@
 
             <div>
                 <label>Semester</label>
-                <select
-                    name="courseSemester"
-                    type="text"
-                    value="{{ old('courseSemester') }}"
-                    class="rounded px-3 py-2 w-full border"
-                    required
-                >
-                    <option selected>Choose a semester</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <select name="courseSemester" class="rounded px-3 py-2 w-full border" required>
+                    <option value="" @selected(! old('courseSemester'))>Choose a semester</option>
+                    <option value="1" @selected(old('courseSemester') == '1')>1</option>
+                    <option value="2" @selected(old('courseSemester') == '2')>2</option>
+                    <option value="3" @selected(old('courseSemester') == '3')>3</option>
                 </select>
-                {{--
-                    <input
-                    name="courseSemester"
-                    type="text"
-                    value="{{ old('courseSemester') }}"
-                    class="rounded px-3 py-2 w-full border"
-                    required
-                    />
-                --}}
             </div>
+
             <div>
                 <label>Degree</label>
-                <select name="courseDegree" type="text" value="{{ old('courseDegree') }}" class="rounded px-3 py-2 w-full border" required>
-                    <option selected>Choose a degree</option>
-                    <option value="One">One</option>
-                    <option value="Dual">Dual</option>
+                <select name="courseDegree" class="rounded px-3 py-2 w-full border" required>
+                    <option value="" @selected(! old('courseDegree'))>Choose a degree</option>
+                    <option value="One" @selected(old('courseDegree') == 'One')>One</option>
+                    <option value="Dual" @selected(old('courseDegree') == 'Dual')>Dual</option>
                 </select>
-                {{--
-                    <input
-                    name="courseDegree"
-                    type="text"
-                    value="{{ old('courseDegree') }}"
-                    class="rounded px-3 py-2 w-full border"
-                    required
-                    />
-                --}}
             </div>
 
             <div class="gap-4 mt-2 flex">

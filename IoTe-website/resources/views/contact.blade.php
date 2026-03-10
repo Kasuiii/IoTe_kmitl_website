@@ -74,8 +74,6 @@
             flex-shrink: 0;
             color: var(--crimson);
         }
-
-        /* MAP EMBED */
         .map-wrapper {
             border-radius: 16px;
             overflow: hidden;
@@ -91,8 +89,6 @@
         .map-wrapper:hover img {
             transform: scale(1.02);
         }
-
-        /* DIVIDER NUMBER */
         .dept-number {
             display: inline-flex;
             align-items: center;
@@ -107,7 +103,6 @@
             flex-shrink: 0;
         }
 
-        /* SOCIAL LINK */
         .social-link {
             display: inline-flex;
             align-items: center;

@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Student\ReservationController;
 use App\Http\Controllers\Admin\FacultyController;
 
-// ── Public ────────────────────────────────────────────────────────────────────
+// Public 
 Route::get('/',             [PageController::class, 'home'])->name('home');
 Route::get('/laboratories', [PageController::class, 'laboratoriesIndex'])->name('laboratories.index');
 Route::get('/laboratories/{id}', [PageController::class, 'laboratoriesShow'])->name('laboratories.show')->where('id', '[1-3]');
@@ -25,7 +25,7 @@ Route::get('/contact',      [PageController::class, 'contact'])->name('contact')
 Route::get('/about-us',     [PageController::class, 'about_us'])->name('about_us');
 Route::get('/syllabus/dual', [PageController::class, 'syllabusdual'])->name('syllabus.dual');
 
-// ── Auth (Google) ──────────────────────────────────────────────────────────────
+// Auth (Google)
 Route::middleware('guest')->group(function () {
     Route::get('/login',  [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
@@ -35,13 +35,9 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [GoogleController::class, 'logout'])->name('logout');
 
-// ── Authenticated (students + admins) ─────────────────────────────────────────
+//Authenticated (students + admins) 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
-
-    // Student reservation routes
-    // IMPORTANT: 'history' must be defined BEFORE '/{reservableItem}/create'
-    // so Laravel doesn't treat the word "history" as a model ID.
     Route::get('/reservations',         [ReservationController::class, 'index'])->name('reservations.index');
     Route::get('/reservations/history', [ReservationController::class, 'history'])->name('reservations.history');
     Route::get('/reservations/{item}/create', [ReservationController::class, 'create'])->name('reservations.create');
@@ -49,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/reservations/{reservation}/cancel',  [ReservationController::class, 'cancel'])->name('reservations.cancel');
 });
 
-// ── Admin-only ─────────────────────────────────────────────────────────────────
+//  Admin-only 
 Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
@@ -65,12 +61,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('faculty', FacultyController::class)->except(['show']);
-
-        // BUG FIX: items resource is now inside the 'admin.' name prefix group.
-        // This makes route names 'admin.items.index', 'admin.items.create', etc.
-        // Previously it was Route::resource('items', ...) outside any prefix,
-        // producing names like 'items.index' — but ItemController was calling
-        // route('admin.items.index'), causing a "route not found" crash.
         Route::resource('items', ItemController::class);
     });
 

@@ -1,9 +1,3 @@
-{{--
-    ═══════════════════════════════════════════════════════════
-    FILE: resources/views/admin/users/index.blade.php
-    View all registered users + breakdown by year/faculty
-    ════════════════════════════════════════════════════════════
---}}
 @extends('layouts.app')
 @section('title', 'Admin · User Accounts')
 

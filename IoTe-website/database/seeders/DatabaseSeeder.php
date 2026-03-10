@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(randomCourseSeeder::class);
         $this->call(StarterFacultyMember::class);
         $this->call(ReservableItemSeeder::class);
+        $this->call(AdmissionSeeder::class);
     }
 }

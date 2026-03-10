@@ -167,7 +167,7 @@
                 @endif
 
                 <p class="text-sm mb-6" style="color: var(--muted); line-height: 1.7">
-                    ระบบนี้สำหรับเจ้าหน้าที่และอาจารย์ของ IoTe KMITL เท่านั้น กรุณาเข้าสู่ระบบด้วยบัญชี Google ของ KMITL
+                    ระบบนี้สำหรับนักศึกษา เจ้าหน้าที่ และอาจารย์ของ IoTe KMITL เท่านั้น กรุณาเข้าสู่ระบบด้วยบัญชี Google ของ KMITL
                 </p>
 
                 <a href="{{ route('google.login') }}" class="google-btn">
@@ -219,7 +219,7 @@
 
                 <div class="text-center">
                     <p style="font-size: 0.8rem; color: var(--muted); line-height: 1.7">
-                        หากไม่ใช่บุคลากร IoTe กรุณาติดต่อ
+                        หากไม่ใช่บุคลากร/นักศึกษาในภาควิชา IoTe กรุณาติดต่อ
                         <br />
                         <a href="mailto:iote@kmitl.ac.th" style="color: var(--crimson); font-weight: 600">iote@kmitl.ac.th</a>
                     </p>

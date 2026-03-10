@@ -3,7 +3,6 @@
 
 @push('styles')
     <style>
-        /* HERO CAROUSEL */
         .hero-carousel {
             position: relative;
             height: 100vh;
@@ -147,8 +146,6 @@
         .carousel-next {
             right: 1.5rem;
         }
-
-        /* STATS */
         .stat-card {
             text-align: center;
             padding: 2.5rem 1.5rem;
@@ -168,8 +165,6 @@
             top: -30px;
             right: -30px;
         }
-
-        /* PROGRAMS */
         .program-card {
             border-radius: 16px;
             overflow: hidden;
@@ -200,8 +195,6 @@
             top: -40px;
             right: -40px;
         }
-
-        /* PROJECTS */
         .project-card {
             border-radius: 14px;
             overflow: hidden;
@@ -226,8 +219,6 @@
         .project-card:hover .project-img img {
             transform: scale(1.06);
         }
-
-        /* CAREER */
         .career-tag {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -243,8 +234,6 @@
             background: var(--crimson);
             color: #fff;
         }
-
-        /* GALLERY */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -349,7 +338,9 @@
         <div class="hero-slide">
             <div
                 class="hero-slide-bg"
-                style="background-image: url('https://images.unsplash.com/photo-1650530415027-dc9199f473ec?q=80&w=1633&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
+                style="
+                    background-image: url('https://images.unsplash.com/photo-1650530415027-dc9199f473ec?q=80&w=1633&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+                "
             ></div>
             <div class="hero-content">
                 <div class="hero-dept">Thailand 5G</div>
@@ -767,7 +758,7 @@
         </div>
     </section>
 
-    <!-- ═══ KEY HIGHLIGHTS ═══ -->
+    <!--  KEY HIGHLIGHTS  -->
     <section style="padding: 6rem 0; background: var(--light)">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="mb-14 text-center">

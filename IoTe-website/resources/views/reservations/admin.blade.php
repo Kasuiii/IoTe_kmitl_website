@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Admin — Reservations')
 
-{{-- Always available from the model, no need to pass from controller --}}
 @php
     $statusLabels = \App\Models\Reservation::$statusLabels;
 @endphp
@@ -204,11 +203,6 @@
 
                             <tr style="border-bottom: 1px solid #f1f5f9; vertical-align: top">
                                 <td style="padding: 1rem; font-size: 0.85rem; color: #94a3b8">#{{ $reservation->id }}</td>
-
-                                {{--
-                                    BUG FIX: was $reservation->student_name (doesn't exist).
-                                    Now uses the loaded 'user' relationship.
-                                --}}
                                 <td style="padding: 1rem">
                                     <div style="font-weight: 600; font-size: 0.9rem; color: #1e293b">
                                         {{ $reservation->user->name }}

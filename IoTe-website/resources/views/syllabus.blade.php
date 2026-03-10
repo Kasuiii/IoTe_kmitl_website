@@ -100,7 +100,6 @@
             background: rgba(22, 123, 0, 0.1);
             color: #167b00;
         }
-        /* Degree tab — the TOP level selector (B.Eng IoT / B.Eng Dual) */
         .degree-tab {
             padding: 0.65rem 1.75rem;
             border-radius: 8px;
@@ -490,7 +489,7 @@
 </section>
 @push('scripts')
     <script>
-        // ── DEGREE TABS ──
+        // DEGREE TABS
         document.querySelectorAll('.degree-tab').forEach((btn) => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.degree-tab').forEach((b) => b.classList.remove('active'));
@@ -500,7 +499,7 @@
             });
         });
 
-        // ── YEAR TABS ──
+        // YEAR TABS
         document.querySelectorAll('.year-tab').forEach((btn) => {
             btn.addEventListener('click', () => {
                 const degreeIndex = btn.dataset.degree;

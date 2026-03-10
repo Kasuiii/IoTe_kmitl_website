@@ -95,7 +95,7 @@
 @endpush
 
 @section('content')
-    {{-- ═══ ADMIN HERO ═══ --}}
+    {{-- ADMIN HERO --}}
     <section style="background: var(--dark); padding: 3.5rem 0 2.5rem; position: relative; overflow: hidden">
         <div
             style="position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(114, 10, 0, 0.4), transparent 65%)"
@@ -107,7 +107,7 @@
         </div>
     </section>
 
-    {{-- ═══ CONTENT ═══ --}}
+    {{-- CONTENT --}}
     <section style="padding: 3rem 0; background: var(--light); min-height: 60vh">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             {{-- Flash messages --}}

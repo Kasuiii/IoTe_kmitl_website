@@ -54,7 +54,7 @@ class FormController extends Controller
     public function update(Request $request, $courseID)
     {
         $validated = $request->validate([
-            'courseYear'     => 'required|integer|min:2000|max:2100',
+            'courseYear'     => 'required|integer|min:1|max:4',
             'courseName'     => 'required|string|max:255',
             'courseCredit'   => 'required|integer|min:0|max:20',
             'courseType'     => 'required|string|max:50',

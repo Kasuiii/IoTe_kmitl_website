@@ -11,7 +11,6 @@
 
     <section style="padding: 3.5rem 0; background: var(--light)">
         <div class="max-w-6xl px-6 mx-auto">
-            {{-- Flash --}}
             @if (session('success'))
                 <div
                     style="

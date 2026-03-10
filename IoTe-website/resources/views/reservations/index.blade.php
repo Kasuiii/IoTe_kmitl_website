@@ -223,7 +223,6 @@
 
                             {{-- Card body --}}
                             <div style="padding: 1.25rem 1.25rem 1.5rem; flex: 1; display: flex; flex-direction: column">
-                                {{-- Name + availability pill --}}
                                 <div
                                     style="
                                         display: flex;

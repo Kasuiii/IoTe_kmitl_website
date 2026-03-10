@@ -11,8 +11,6 @@ class ReservationAdminController extends Controller
     public function index(Request $request)
     {
         $query = Reservation::with(['user', 'item'])->latest();
-
-        // Filter by status
         if ($request->status) {
             $query->where('status', $request->status);
         }
@@ -23,7 +21,6 @@ class ReservationAdminController extends Controller
         return view('reservations.admin', compact('reservations', 'statusOptions'));
     }
 
-    // Update reservation status
     public function updateStatus(Request $request, Reservation $reservation)
     {
         $request->validate([
@@ -34,7 +31,6 @@ class ReservationAdminController extends Controller
         $reservation->update([
             'status'      => $request->status,
             'admin_notes' => $request->admin_notes,
-            // Set actual return date when marking as returned
             'actual_return_date' => $request->status === 'returned' ? now()->toDateString() : $reservation->actual_return_date,
         ]);
 

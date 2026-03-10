@@ -38,7 +38,6 @@ class ItemController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('items', 'public');
-            // Storage::url() respects your filesystems.php config (local OR S3/cloud)
             $data['image_url'] = Storage::url($path);
         }
 
@@ -68,7 +67,6 @@ class ItemController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old image file if it exists
             if ($item->image_url) {
                 $oldPath = ltrim(parse_url($item->image_url, PHP_URL_PATH), '/');
                 $oldPath = preg_replace('#^storage/#', '', $oldPath);

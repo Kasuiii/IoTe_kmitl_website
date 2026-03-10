@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class FacultyEducation extends Model
 {
+
+    public $timestamps = false;
+
     protected $fillable = [
         'faculty_member_id',
         'degree',
@@ -13,11 +16,11 @@ class FacultyEducation extends Model
         'university',
         'country',
         'year',
-        'sort_order'
+        'sort_order',
     ];
 
     public function faculty()
     {
-        return $this->belongsTo(FacultyMember::class);
+        return $this->belongsTo(FacultyMember::class, 'faculty_member_id');
     }
 }

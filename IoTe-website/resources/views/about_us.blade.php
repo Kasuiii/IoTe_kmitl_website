@@ -208,7 +208,7 @@
                     View Official Curriculum ↗
                 </a>
                 <a
-                    href="{{ route('admission') }}"
+                    href="{{ route('admission.index') }}"
                     style="
                         display: inline-flex;
                         align-items: center;
@@ -317,9 +317,6 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         PROGRAMME TYPE CARDS (3 cards, centre)
-         ========================================== -->
     <section style="padding: 4rem 0; background: #fff; border-bottom: 1px solid var(--border)">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="mb-10 text-center">
@@ -342,7 +339,6 @@
             </div>
         </div>
     </section>
-    <!-- ========================================== -->
 
     <!-- YEAR TABS -->
     <section style="padding: 5rem 0; background: #fff">
@@ -365,15 +361,8 @@
             </div>
 
             @php
-                // ══════════════════════════════════════════════════════════════
-                // HARDCODED COURSE DATA — หลักสูตร ปป. 2569 (138 credits)
-                // อ้างอิงจากแผนการศึกษา วศ.บ. วิศวกรรมระบบไอโอทีและสารสนเทศ
-                // format: [courseID, courseName, credits, type]
-                // type: core | lab | gen | elective
-                // ══════════════════════════════════════════════════════════════
                 $allCourses = [
                     1 => [
-                        // Year 1
                         1 => [
                             // Semester 1
                             ['01006030', 'Calculus 1', 3, 'core'],

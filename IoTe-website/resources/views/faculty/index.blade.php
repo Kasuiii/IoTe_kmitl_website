@@ -109,86 +109,250 @@
             color: #fff;
             font-family: 'Playfair Display', serif;
         }
+
         .faculty-popup {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.6);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            padding: 1rem;
+            animation: backdropIn 0.2s ease;
+        }
+        @keyframes backdropIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .faculty-popup-card {
             background: white;
-            border-radius: 14px;
-            max-width: 650px;
-            width: 90%;
-            padding: 2rem;
+            border-radius: 20px;
+            max-width: 680px;
+            width: 100%;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.28);
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh; /* prevents overflow on small screens */
+            animation: cardIn 0.25s cubic-bezier(0.34, 1.3, 0.64, 1);
+        }
+        @keyframes cardIn {
+            from {
+                transform: scale(0.93) translateY(16px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .popup-header-band {
+            background: linear-gradient(135deg, var(--dark, #1a0505) 0%, #3d1212 100%);
+            border-radius: 20px 20px 0 0;
+            padding: 2rem 2rem 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .popup-body {
+            overflow-y: auto;
+            padding: 1.75rem 2rem 2rem;
+            flex: 1;
         }
 
         .popup-close {
             position: absolute;
-            top: 15px;
-            right: 18px;
-            font-size: 24px;
+            top: 14px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             border: none;
-            background: none;
+            background: rgba(255, 255, 255, 0.15);
             cursor: pointer;
-            color: var(--muted);
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 1;
+        }
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .popup-header {
             display: flex;
             gap: 1.5rem;
             align-items: center;
-            margin-bottom: 1.5rem;
         }
 
-        .faculty-avatar.large {
-            width: 110px;
-            height: 110px;
+        .popup-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid rgba(255, 255, 255, 0.25);
+        }
+        .popup-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .popup-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--crimson, #720a00), var(--orange, #f97316));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
         }
 
         .popup-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--dark);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
         }
-
-        .popup-th {
-            color: var(--crimson);
-            font-weight: 500;
+        .popup-name-th {
             font-size: 0.9rem;
+            color: rgba(255, 200, 150, 0.9);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
         }
-
-        .popup-role {
-            color: var(--muted);
+        .popup-role-text {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
             font-style: italic;
             margin-bottom: 0.5rem;
         }
-
-        .popup-email {
-            font-size: 0.85rem;
-            color: var(--crimson);
+        .popup-email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: rgba(255, 180, 120, 0.95);
+            text-decoration: none;
         }
-
-        .popup-section h4 {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
+        .popup-email-link:hover {
+            color: #fff;
+        }
+        .popup-divider {
+            border: none;
+            border-top: 1px solid var(--border, #e5e7eb);
+            margin: 1.25rem 0;
+        }
+        .popup-section-title {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--crimson, #720a00);
+            margin-bottom: 0.85rem;
         }
 
         .expertise-tag {
             font-size: 0.65rem;
-            background: var(--light);
-            color: var(--muted);
+            background: var(--light, #f8f4f4);
+            color: var(--muted, #888);
             font-weight: 500;
             padding: 0.2rem 0.55rem;
             border-radius: 4px;
+        }
+        .edu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .edu-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .edu-dot-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 4px;
+            flex-shrink: 0;
+        }
+        .edu-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--crimson, #720a00);
+            flex-shrink: 0;
+        }
+        .edu-line {
+            width: 2px;
+            flex: 1;
+            min-height: 20px;
+            background: var(--border, #e5e7eb);
+            margin-top: 4px;
+        }
+
+        .edu-item:last-child .edu-line {
+            display: none;
+        }
+
+        .edu-content {
+        }
+        .edu-degree {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--dark, #1a0505);
+            line-height: 1.3;
+        }
+        .edu-field {
+            font-size: 0.78rem;
+            color: var(--muted, #888);
+            margin-top: 0.1rem;
+        }
+        .edu-meta {
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .edu-university {
+            font-size: 0.75rem;
+            color: var(--crimson, #720a00);
+            font-weight: 500;
+        }
+        .edu-year {
+            font-size: 0.7rem;
+            background: rgba(114, 10, 0, 0.07);
+            color: var(--crimson, #720a00);
+            padding: 0.05rem 0.45rem;
+            border-radius: 99px;
+            font-weight: 600;
+        }
+        .edu-country {
+            font-size: 0.7rem;
+            color: var(--muted, #888);
+        }
+
+        .edu-empty {
+            font-size: 0.8rem;
+            color: var(--muted, #888);
+            font-style: italic;
         }
     </style>
 @endpush
@@ -197,7 +361,6 @@
     <!-- HERO -->
     <section style="background: linear-gradient(135deg, var(--dark), #2c1010); padding: 7rem 0 5rem; position: relative; overflow: hidden">
         <div
-            {{-- style="position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(114, 10, 0, 0.5), transparent 65%)" --}}
             style="
                 position: absolute;
                 inset: 0;
@@ -245,10 +408,10 @@
         <div class="max-w-7xl gap-3 px-4 sm:px-6 lg:px-8 mx-auto flex flex-wrap items-center">
             <span class="mr-1 text-sm font-medium" style="color: var(--muted)">Filter by:</span>
             <button class="filter-btn active" data-filter="all">All Faculty</button>
-            <button class="filter-btn" data-filter="professor">Professor / ศ.</button>
-            <button class="filter-btn" data-filter="assoc_prof">Assoc. Prof. / รศ.</button>
-            <button class="filter-btn" data-filter="asst_prof">Asst. Prof. / ผศ.</button>
-            <button class="filter-btn" data-filter="lecturer">Lecturer / อาจารย์</button>
+            <button class="filter-btn" data-filter="Prof. Dr.">Professor / ศ.</button>
+            <button class="filter-btn" data-filter="Assoc. Prof. Dr.">Assoc. Prof. / รศ.</button>
+            <button class="filter-btn" data-filter="Asst. Prof. Dr.">Asst. Prof. / ผศ.</button>
+            <button class="filter-btn" data-filter="Lecturer">Lecturer / อาจารย์</button>
         </div>
     </div>
 
@@ -322,10 +485,12 @@
 
             <div class="gap-6 md:grid-cols-2 lg:grid-cols-4 grid grid-cols-1" id="faculty-grid">
                 @foreach ($faculty as $member)
+                    {{-- CARD --}}
                     <div
                         class="faculty-card faculty-item"
-                        data-rank="{{ $member['role'] }}"
+                        data-rank="{{ $member['prefix_en'] }}"
                         onclick="openFaculty('{{ Str::slug($member['en']) }}')"
+                        style="cursor: pointer"
                     >
                         <div class="faculty-avatar">
                             @if ($member['img'])
@@ -347,7 +512,12 @@
                             @endif
                             <div class="faculty-avatar-overlay">
                                 <div class="gap-2 flex">
-                                    <a href="mailto:{{ $member['email'] }}" class="social-link" title="Email">
+                                    <a
+                                        href="mailto:{{ $member['email'] }}"
+                                        class="social-link"
+                                        title="Email"
+                                        onclick="event.stopPropagation()"
+                                    >
                                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path
                                                 stroke-linecap="round"
@@ -366,9 +536,11 @@
                                 class="mb-1 text-sm leading-tight font-bold"
                                 style="color: var(--dark); font-family: 'Playfair Display', serif"
                             >
-                                {{ $member['en'] }}
+                                {{ $member['prefix_en'] . ' ' . $member['en'] }}
                             </h3>
-                            <p class="mb-1 text-xs" style="color: var(--crimson); font-weight: 500">{{ $member['th'] }}</p>
+                            <p class="mb-1 text-xs" style="color: var(--crimson); font-weight: 500">
+                                {{ $member['prefix_th'] . ' ' . $member['th'] }}
+                            </p>
                             <p class="mb-3 text-xs" style="color: var(--muted); font-style: italic">{{ $member['position'] }}</p>
                             <div class="gap-1 flex flex-wrap">
                                 @foreach (array_slice($member['research_interests'], 0, 3) as $e)
@@ -388,49 +560,121 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- POPUP MODAL --}}
                     <div id="faculty-modal-{{ Str::slug($member['en']) }}" class="faculty-popup">
                         <div class="faculty-popup-card">
-                            <button class="popup-close" onclick="closeFaculty('{{ Str::slug($member['en']) }}')">×</button>
+                            <div class="popup-header-band">
+                                <button class="popup-close" onclick="closeFaculty('{{ Str::slug($member['en']) }}')">×</button>
+                                <div class="popup-header">
+                                    {{-- Photo --}}
+                                    <div class="popup-photo">
+                                        @if ($member['img'])
+                                            <img
+                                                src="{{ $member['img'] }}"
+                                                alt="{{ $member['en'] }}"
+                                                onerror="
+                                                    this.parentElement.innerHTML =
+                                                        '<div class=\'popup-photo-placeholder\'>{{ strtoupper(substr($member['en'], strpos($member['en'], ' ') + 1, 1)) }}</div>'
+                                                "
+                                            />
+                                        @else
+                                            <div class="popup-photo-placeholder">
+                                                {{ strtoupper(substr($member['en'], strpos($member['en'], ' ') + 1, 1)) }}
+                                            </div>
+                                        @endif
+                                    </div>
 
-                            <div class="popup-header">
-                                <div class="faculty-avatar large">
-                                    @if ($member['img'])
-                                        <img src="{{ $member['img'] }}" alt="{{ $member['en'] }}" />
-                                    @else
-                                        <div class="avatar-placeholder">
-                                            {{ strtoupper(substr($member['en'], strpos($member['en'], ' ') + 1, 1)) }}
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <div class="popup-info">
-                                    <span class="role-badge">{{ $member['rank_label'] }}</span>
-
-                                    <h2 class="popup-name">
-                                        {{ $member['en'] }}
-                                    </h2>
-
-                                    <p class="popup-th">{{ $member['th'] }}</p>
-
-                                    <p class="popup-role">{{ $member['role'] }}</p>
-
-                                    <a href="mailto:{{ $member['email'] }}" class="popup-email">
-                                        {{ $member['email'] }}
-                                    </a>
+                                    <div>
+                                        <span
+                                            class="role-badge"
+                                            style="background: rgba(255, 255, 255, 0.15); color: rgba(255, 200, 150, 0.95)"
+                                        >
+                                            {{ $member['rank_label'] }}
+                                        </span>
+                                        <h2 class="popup-name">{{ $member['en'] }}</h2>
+                                        <p class="popup-name-th">{{ $member['th'] }}</p>
+                                        <p class="popup-role-text">{{ $member['role'] }}</p>
+                                        @if ($member['email'])
+                                            <a href="mailto:{{ $member['email'] }}" class="popup-email-link">
+                                                {{-- email icon --}}
+                                                <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                    />
+                                                </svg>
+                                                {{ $member['email'] }}
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="popup-section">
-                                <h4>Research_interests</h4>
+                            {{-- Scrollable body --}}
+                            <div class="popup-body">
+                                {{-- Research Interests --}}
+                                @if (! empty($member['research_interests']))
+                                    <p class="popup-section-title">Research Interests</p>
+                                    <div class="gap-2 flex flex-wrap">
+                                        @foreach ($member['research_interests'] as $e)
+                                            <span class="expertise-tag">{{ $e }}</span>
+                                        @endforeach
+                                    </div>
+                                @endif
 
-                                <div class="gap-2 flex flex-wrap">
-                                    @foreach ($member['research_interests'] as $e)
-                                        <span class="expertise-tag">{{ $e }}</span>
-                                    @endforeach
-                                </div>
+                                {{-- Education --}}
+                                @if (! empty($member['educations']))
+                                    <hr class="popup-divider" />
+                                    <p class="popup-section-title">Education</p>
+
+                                    <div class="edu-list">
+                                        @foreach ($member['educations'] as $edu)
+                                            <div class="edu-item">
+                                                {{-- Dot + connecting line column --}}
+                                                <div class="edu-dot-col">
+                                                    <div class="edu-dot"></div>
+                                                    <div class="edu-line"></div>
+                                                </div>
+
+                                                {{-- Text content --}}
+                                                <div class="edu-content">
+                                                    <div class="edu-degree">{{ $edu['degree'] }}</div>
+
+                                                    @if (! empty($edu['field']))
+                                                        <div class="edu-field">{{ $edu['field'] }}</div>
+                                                    @endif
+
+                                                    <div class="edu-meta">
+                                                        @if (! empty($edu['university']))
+                                                            <span class="edu-university">{{ $edu['university'] }}</span>
+                                                        @endif
+
+                                                        @if (! empty($edu['country']))
+                                                            <span class="edu-country">· {{ $edu['country'] }}</span>
+                                                        @endif
+
+                                                        @if (! empty($edu['year']))
+                                                            <span class="edu-year">{{ $edu['year'] }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @elseif (! empty($member['research_interests']))
+                                    <hr class="popup-divider" />
+                                    <p class="popup-section-title">Education</p>
+                                    <p class="edu-empty">No education records available.</p>
+                                @endif
                             </div>
+                            {{-- end .popup-body --}}
                         </div>
+                        {{-- end .faculty-popup-card --}}
                     </div>
+                    {{-- end .faculty-popup --}}
                 @endforeach
             </div>
         </div>
@@ -532,6 +776,7 @@
 
 @push('scripts')
     <script>
+        // Filter buttons
         document.querySelectorAll('.filter-btn').forEach((btn) => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
@@ -548,20 +793,35 @@
                 });
             });
         });
+
+        // Open popup
         function openFaculty(id) {
-            document.getElementById('faculty-modal-' + id).style.display = 'flex';
+            const modal = document.getElementById('faculty-modal-' + id);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeFaculty(id) {
             document.getElementById('faculty-modal-' + id).style.display = 'none';
+            document.body.style.overflow = '';
         }
 
         window.addEventListener('click', function (e) {
             document.querySelectorAll('.faculty-popup').forEach((modal) => {
                 if (e.target === modal) {
                     modal.style.display = 'none';
+                    document.body.style.overflow = '';
                 }
             });
+        });
+
+        window.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.faculty-popup').forEach((modal) => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = '';
+            }
         });
     </script>
 @endpush

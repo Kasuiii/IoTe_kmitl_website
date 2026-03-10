@@ -20,16 +20,15 @@ return new class extends Migration
     {
         Schema::create('reservable_items', function (Blueprint $table) {
             $table->id();
-            $table->string('name');                 // "ESP32 DevKit V1"
-            $table->string('category');             // "Microcontroller" / "Lab Instrument" etc
+            $table->string('name');
+            $table->string('category');
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
-            // 'engineering' = only 01 faculty, 'science' = only 05 faculty, 'all' = everyone
             $table->string('faculty_access')->default('all');
             $table->integer('quantity_total')->default(1);
-            $table->integer('quantity_available')->default(1); // admin manages manually too
-            $table->integer('max_borrow_days')->default(7);    // max loan duration
-            $table->boolean('is_active')->default(true);       // hide item without deleting
+            $table->integer('quantity_available')->default(1);
+            $table->integer('max_borrow_days')->default(7);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
 
@@ -38,13 +37,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('reservable_item_id')->constrained()->onDelete('cascade');
             $table->integer('quantity_requested')->default(1);
-            $table->date('borrow_date');            // when they want to pick it up
-            $table->date('return_date');            // when they promise to return it
-            $table->date('actual_return_date')->nullable(); // filled in by admin when returned
-            // Status flow: pending → approved → borrowed → returned (or rejected/cancelled)
+            $table->date('borrow_date');
+            $table->date('return_date');
+            $table->date('actual_return_date')->nullable();
+
             $table->string('status')->default('pending');
-            $table->text('purpose')->nullable();    // why they need it
-            $table->text('admin_notes')->nullable(); // admin can write notes
+            $table->text('purpose')->nullable();
+            $table->text('admin_notes')->nullable();
             $table->timestamps();
         });
     }

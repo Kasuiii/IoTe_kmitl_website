@@ -11,16 +11,13 @@ use Illuminate\Http\Request;
 
 class AdmissionController extends Controller
 {
-    // Show all rounds with their projects nested inside
     public function index()
     {
-        $rounds = AdmissionRound::with('projects')   // eager load = load related projects in one query
+        $rounds = AdmissionRound::with('projects')
             ->orderBy('sort_order')
             ->get();
         return view('admin.admission.index', compact('rounds'));
     }
-
-    // ── ROUNDS ────────────────────────────────────────────────
 
     public function createRound()
     {
@@ -64,12 +61,9 @@ class AdmissionController extends Controller
 
     public function destroyRound(AdmissionRound $round)
     {
-        // Cascade will auto-delete all child projects
         $round->delete();
         return redirect()->route('admin.admission.index')->with('success', 'ลบรอบการรับสมัครสำเร็จ!');
     }
-
-    // ── PROJECTS ──────────────────────────────────────────────
 
     public function createProject(AdmissionRound $round)
     {

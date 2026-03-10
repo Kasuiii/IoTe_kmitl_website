@@ -65,6 +65,70 @@
             display: block;
             margin-bottom: 0.75rem;
         }
+
+        /* Education rows */
+        .education-block {
+            background: #f9fafb;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            position: relative;
+        }
+        .education-block .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+        .education-block .edu-grid input {
+            padding: 0.55rem 0.8rem;
+            border: 1.5px solid var(--border);
+            border-radius: 7px;
+            font-size: 0.85rem;
+            width: 100%;
+            background: #fff;
+            outline: none;
+        }
+        .education-block .edu-grid input:focus {
+            border-color: var(--crimson);
+            box-shadow: 0 0 0 3px rgba(114, 10, 0, 0.08);
+        }
+        .education-block .edu-grid .full-width {
+            grid-column: 1 / -1;
+        }
+        .btn-remove-edu {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.75rem;
+            background: rgba(220, 38, 38, 0.1);
+            color: #dc2626;
+            border: none;
+            border-radius: 6px;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-remove-edu:hover {
+            background: #dc2626;
+            color: #fff;
+        }
+        .btn-add-edu {
+            background: rgba(114, 10, 0, 0.08);
+            color: var(--crimson);
+            border: 1.5px dashed var(--crimson);
+            border-radius: 9px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 0.5rem;
+            transition: all 0.15s;
+        }
+        .btn-add-edu:hover {
+            background: var(--crimson);
+            color: #fff;
+        }
     </style>
 @endpush
 
@@ -98,14 +162,12 @@
     {{-- Form --}}
     <section style="padding: 3rem 0; background: var(--light)">
         <div class="max-w-5xl px-4 sm:px-6 lg:px-8 mx-auto">
-            {{-- enctype="multipart/form-data" is REQUIRED for file uploads --}}
             <form
                 method="POST"
-                action="{{ $member ? route('admin.faculty.update', ['faculty' => $member->id]) : route('admin.faculty.store') }}"
+                action="{{ $member ? route('admin.faculty.update', $member->id) : route('admin.faculty.store') }}"
                 enctype="multipart/form-data"
             >
                 @csrf
-                {{-- PUT method because HTML forms only support GET/POST --}}
                 @if ($member)
                     @method('PUT')
                 @endif
@@ -116,25 +178,40 @@
                     <div class="md:grid-cols-3 gap-4 grid grid-cols-1">
                         <div class="form-group">
                             <label class="form-label">คำนำหน้า (Prefix) *</label>
-                            {{-- old() = re-fills value if validation fails --}}
-                            <input
+                            <select name="prefix" class="form-input">
+                                @foreach ([
+                                        'ศ.' => 'ศาสตราจารย์ (Professor)',
+                                        'รศ.' => 'รองศาสตราจารย์ (Assoc.)',
+                                        'ผศ.' => 'ผู้ช่วยศาสตราจารย์ (Asst.)',
+                                        'ดร.' => 'อาจารย์ (Lecturer)'
+                                    ]
+                                    as $val => $label)
+                                    <option value="{{ $val }}" {{ old('prefix', $member?->prefix) === $val ? 'selected' : '' }}>
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{--
+                                <input
                                 type="text"
                                 name="prefix"
-                                class="form-input @error('prefix') error @endif"
+                                class="form-input @error('prefix') error @enderror"
                                 value="{{ old('prefix', $member?->prefix) }}"
                                 placeholder="ผศ.ดร. / รศ.ดร."
                                 required
-                            />
+                                />
+                            --}}
                             @error('prefix')
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="form-group md:col-span-2">
                             <label class="form-label">ชื่อภาษาไทย *</label>
                             <input
                                 type="text"
                                 name="name_th"
-                                class="form-input @error('name_th') error @endif"
+                                class="form-input @error('name_th') error @enderror"
                                 value="{{ old('name_th', $member?->name_th) }}"
                                 required
                             />
@@ -142,12 +219,13 @@
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="form-group md:col-span-2">
                             <label class="form-label">ชื่อภาษาอังกฤษ *</label>
                             <input
                                 type="text"
                                 name="name_en"
-                                class="form-input @error('name_en') error @endif"
+                                class="form-input @error('name_en') error @enderror"
                                 value="{{ old('name_en', $member?->name_en) }}"
                                 required
                             />
@@ -155,29 +233,35 @@
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="form-group">
+
+                        {{--
+                            <div class="form-group">
                             <label class="form-label">Role *</label>
-                            <select name="role" class="form-input">
-                                @foreach (['professor' => 'ศาสตราจารย์ (Professor)', 'assoc_prof' => 'รองศาสตราจารย์ (Assoc.)', 'asst_prof' => 'ผู้ช่วยศาสตราจารย์ (Asst.)', 'lecturer' => 'อาจารย์ (Lecturer)'] as $val => $label)
-                                    <option value="{{ $val }}" {{ old('role', $member?->role) === $val ? 'selected' : '' }}>
-                                        {{ $label }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('role')
-                                <p class="form-error">{{ $message }}</p>
+                            <input
+                            type="text"
+                            name="position"
+                            class="form-input @error('position') error @enderror"
+                            value="{{ old('position', $member?->position) }}"
+                            placeholder="ผศ.ดร. / รศ.ดร."
+                            required
+                            />
+                            @error('position')
+                            <p class="form-error">{{ $message }}</p>
                             @enderror
-                        </div>
+                            </div>
+                        --}}
+
                         <div class="form-group">
-                            <label class="form-label">ตำแหน่งพิเศษ (Position)</label>
+                            <label class="form-label">ตำแหน่งพิเศษ (Role)</label>
                             <input
                                 type="text"
-                                name="position"
+                                name="role"
                                 class="form-input"
-                                value="{{ old('position', $member?->position) }}"
+                                value="{{ old('role', $member?->role) }}"
                                 placeholder="หัวหน้าภาควิชา / รองหัวหน้า"
                             />
                         </div>
+
                         <div class="form-group">
                             <label class="form-label">ลำดับการแสดง (Sort Order)</label>
                             <input
@@ -188,6 +272,7 @@
                             />
                             <p style="font-size: 0.73rem; color: var(--muted); margin-top: 0.3rem">เลขน้อย = แสดงก่อน (0 = ค่าเริ่มต้น)</p>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label gap-2 flex items-center">
                                 <input
@@ -212,7 +297,7 @@
                             <input
                                 type="email"
                                 name="email"
-                                class="form-input @error('email') error @endif"
+                                class="form-input @error('email') error @enderror"
                                 value="{{ old('email', $member?->email) }}"
                                 placeholder="firstname.la@kmitl.ac.th"
                             />
@@ -220,6 +305,7 @@
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label class="form-label">โทรศัพท์ (Phone)</label>
                             <input
@@ -230,6 +316,7 @@
                                 placeholder="02-329-8000 ext. 5XXX"
                             />
                         </div>
+
                         <div class="form-group md:col-span-2">
                             <label class="form-label">ห้องทำงาน / ที่ตั้ง</label>
                             <input
@@ -242,30 +329,64 @@
                         </div>
                     </div>
                 </div>
-                {{-- SECTION 3: Education --}}
-                    <div class="form-card">
-                        <div class="form-section-title">🎓 ประวัติการศึกษา</div>
-                        <div id="educations-container" class="gap-4 flex flex-col">
-                            @php
-                                $educations = old('educations', $member ? $member->educations->toArray() : []);
-                            @endphp
-                            @foreach ($educations as $index => $edu)
-                                <div class="education-block" data-index="{{ $index }}">
-                                    <div class="gap-2 flex flex-wrap">
-                                        <input type="text" name="educations[{{ $index }}][degree]" placeholder="Degree (ex. B.Sc. Computer Science)" value="{{ $edu['degree'] ?? '' }}" class="form-input" />
-                                        <input type="text" name="educations[{{ $index }}][field]" placeholder="Field of Study" value="{{ $edu['field'] ?? '' }}" class="form-input" />
-                                        <input type="text" name="educations[{{ $index }}][university]" placeholder="University" value="{{ $edu['university'] ?? '' }}" class="form-input" />
-                                        <input type="text" name="educations[{{ $index }}][country]" placeholder="Country" value="{{ $edu['country'] ?? '' }}" class="form-input" />
-                                        <input type="text" name="educations[{{ $index }}][year]" placeholder="Year" value="{{ $edu['year'] ?? '' }}" class="form-input" />
-                                    </div>
+
+                {{-- ── SECTION 3: Education ── --}}
+                <div class="form-card">
+                    <div class="form-section-title">🎓 ประวัติการศึกษา</div>
+
+                    <div id="educations-container" class="gap-3 flex flex-col">
+                        @php
+                            $educations = old('educations', $member ? $member->educations->toArray() : []);
+                        @endphp
+
+                        @foreach ($educations as $index => $edu)
+                            <div class="education-block">
+                                <button type="button" class="btn-remove-edu" onclick="removeEducation(this)">✕ ลบ</button>
+                                <div class="edu-grid">
+                                    <input
+                                        type="text"
+                                        name="educations[{{ $index }}][degree]"
+                                        placeholder="Degree (e.g. Ph.D., M.Sc., B.Eng.)"
+                                        value="{{ $edu['degree'] ?? '' }}"
+                                        class="full-width"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="educations[{{ $index }}][field]"
+                                        placeholder="Field of Study (e.g. Computer Engineering)"
+                                        value="{{ $edu['field'] ?? '' }}"
+                                        class="full-width"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="educations[{{ $index }}][university]"
+                                        placeholder="University"
+                                        value="{{ $edu['university'] ?? '' }}"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="educations[{{ $index }}][country]"
+                                        placeholder="Country"
+                                        value="{{ $edu['country'] ?? '' }}"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="educations[{{ $index }}][year]"
+                                        placeholder="Year (e.g. 2015)"
+                                        value="{{ $edu['year'] ?? '' }}"
+                                    />
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
+
+                    <button type="button" class="btn-add-edu" onclick="addEducation()">+ เพิ่มประวัติการศึกษา</button>
                 </div>
-                {{-- SECTION 3: Research --}}
+
+                {{-- SECTION 4: Research --}}
                 <div class="form-card">
                     <div class="form-section-title">🔬 งานวิจัยและความเชี่ยวชาญ</div>
+
                     <div class="form-group">
                         <label class="form-label">Research Interests (คั่นด้วยเครื่องหมาย ,)</label>
                         <input
@@ -276,15 +397,17 @@
                             placeholder="IoT Security, Machine Learning, Embedded Systems"
                         />
                         <p style="font-size: 0.73rem; color: var(--muted); margin-top: 0.3rem">
-                            ตัวอย่าง: IoT Security, Edge AI, Smart Grid — จะแสดงเป็น tag บนหน้าเว็บ
+                            ตัวอย่าง: IoT Security, Edge AI — จะแสดงเป็น tag บนหน้าเว็บ
                         </p>
                     </div>
+
                     <div class="form-group">
                         <label class="form-label">Study Paths / สายการเรียนรู้ที่แนะนำ</label>
                         <textarea name="study_paths" class="form-input" rows="3" placeholder="แนะนำสำหรับสาย Embedded / แนะนำสำหรับสาย AI">
 {{ old('study_paths', $member?->study_paths) }}</textarea
                         >
                     </div>
+
                     <div class="form-group">
                         <label class="form-label">ประวัติย่อ (Bio)</label>
                         <textarea
@@ -296,38 +419,12 @@
 {{ old('bio', $member?->bio) }}</textarea
                         >
                     </div>
-                    <div class="form-group">
-                        <label>Study Path</label>
-
-                        <div class="study-block">
-                            <label>Undergraduate</label>
-                            <input type="text" name="study_undergrad_degree" placeholder="Degree (ex. B.Sc. Computer Science)" />
-                            <input type="text" name="study_undergrad_university" placeholder="University" />
-                            <input type="text" name="study_undergrad_country" placeholder="Country" />
-                            <input type="text" name="study_undergrad_year" placeholder="Year" />
-                        </div>
-
-                        <div class="study-block">
-                            <label>Master</label>
-                            <input type="text" name="study_master_degree" placeholder="Degree" />
-                            <input type="text" name="study_master_university" placeholder="University" />
-                            <input type="text" name="study_master_country" placeholder="Country" />
-                            <input type="text" name="study_master_year" placeholder="Year" />
-                        </div>
-
-                        <div class="study-block">
-                            <label>Doctoral</label>
-                            <input type="text" name="study_phd_degree" placeholder="Degree" />
-                            <input type="text" name="study_phd_university" placeholder="University" />
-                            <input type="text" name="study_phd_country" placeholder="Country" />
-                            <input type="text" name="study_phd_year" placeholder="Year" />
-                        </div>
-                    </div>
                 </div>
 
-                {{-- SECTION 4: Photo --}}
+                {{-- SECTION 5: Photo --}}
                 <div class="form-card">
                     <div class="form-section-title">📷 รูปโปรไฟล์</div>
+
                     @if ($member?->photo_url)
                         <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem">รูปปัจจุบัน:</p>
                         <img
@@ -347,7 +444,7 @@
                     </div>
                 </div>
 
-                {{-- Submit buttons --}}
+                {{-- Submit --}}
                 <div class="gap-4 flex items-center">
                     <button type="submit" class="btn-primary">
                         {{ $member ? '💾 บันทึกการแก้ไข' : '➕ เพิ่มอาจารย์' }}
@@ -358,36 +455,30 @@
         </div>
     </section>
 @endsection
-@push('script')
-    <script>
 
-        let eduIndex = 1;
+@push('scripts')
+    <script>
+        let eduIndex = document.querySelectorAll('.education-block').length;
 
         function addEducation() {
-        
-            const wrapper = document.getElementById('education-wrapper');
-        
+            const container = document.getElementById('educations-container');
             const html = `
-                <div class="education-row">
-                
-                    <input type="text" name="educations[${eduIndex}][degree]" placeholder="Degree">
-                
-                    <input type="text" name="educations[${eduIndex}][field]" placeholder="Field">
-                
-                    <input type="text" name="educations[${eduIndex}][university]" placeholder="University">
-                
-                    <input type="text" name="educations[${eduIndex}][country]" placeholder="Country">
-                
-                    <input type="text" name="educations[${eduIndex}][year]" placeholder="Year">
-                
+            <div class="education-block">
+                <button type="button" class="btn-remove-edu" onclick="removeEducation(this)">✕ ลบ</button>
+                <div class="edu-grid">
+                    <input type="text" name="educations[${eduIndex}][degree]"     placeholder="Degree (e.g. Ph.D., M.Sc., B.Eng.)"         class="full-width" />
+                    <input type="text" name="educations[${eduIndex}][field]"      placeholder="Field of Study (e.g. Computer Engineering)"  class="full-width" />
+                    <input type="text" name="educations[${eduIndex}][university]" placeholder="University" />
+                    <input type="text" name="educations[${eduIndex}][country]"    placeholder="Country" />
+                    <input type="text" name="educations[${eduIndex}][year]"       placeholder="Year (e.g. 2015)" />
                 </div>
-            `;
-            
-            wrapper.insertAdjacentHTML('beforeend', html);
-            
+            </div>`;
+            container.insertAdjacentHTML('beforeend', html);
             eduIndex++;
-            
         }
 
+        function removeEducation(btn) {
+            btn.closest('.education-block').remove();
+        }
     </script>
 @endpush

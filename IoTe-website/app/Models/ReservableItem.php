@@ -20,7 +20,6 @@ class ReservableItem extends Model
 
     protected $casts = ['is_active' => 'boolean'];
 
-    // Treat empty string the same as 'all'
     public function getFacultyAccessAttribute($value): string
     {
         return (empty($value)) ? 'all' : $value;
@@ -52,7 +51,6 @@ class ReservableItem extends Model
         $facultyName = $facultyCode === '01' ? 'engineering' : 'science';
 
         return $query->where(function ($q) use ($facultyName) {
-            // empty string = all, so include it too
             $q->where('faculty_access', 'all')
                 ->orWhere('faculty_access', '')
                 ->orWhereNull('faculty_access')

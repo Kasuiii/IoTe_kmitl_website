@@ -33,7 +33,7 @@ class PageController extends Controller
 
     public function admission()
     {
-        $rounds = AdmissionRound::with('projects')   // eager load = load related projects in one query
+        $rounds = AdmissionRound::with('projects')
             ->orderBy('sort_order')
             ->get();
         return view('admission.index', compact('rounds'));
@@ -53,7 +53,6 @@ class PageController extends Controller
                 $degreeGroup->groupBy('courseYear')
                     ->map(
                         fn($yearGroup) =>
-                        // For EACH year group, group again by semester
                         $yearGroup->groupBy('courseSemester')
                     )
             );
@@ -96,10 +95,21 @@ class PageController extends Controller
 
     public function faculty()
     {
-        $faculty = FacultyMember::orderBy('sort_order')->get()->map(function ($f) {
+        $faculty = FacultyMember::with('educations')->orderBy('sort_order')->get()->map(function ($f) {
+
+            $p = trim($f->prefix ?? '');
+            $prefixEn = match (true) {
+                str_starts_with($p, 'ศ.')   => 'Prof. Dr.',
+                str_starts_with($p, 'รศ.')  => 'Assoc. Prof. Dr.',
+                str_starts_with($p, 'ผศ.')  => 'Asst. Prof. Dr.',
+                str_starts_with($p, 'ดร.')  => 'Dr.',
+                str_starts_with($p, 'อ.')   => 'Lecturer',
+                default                  => $p,
+            };
 
             return [
-                'rank' => $f->rank ?? 0,
+                'prefix_th' => $p,
+                'prefix_en' => $prefixEn,
                 'rank_label' => $f->rank_label ?? $f->position,
                 'en' => $f->name_en,
                 'th' => $f->name_th,
@@ -108,11 +118,14 @@ class PageController extends Controller
                 'email' => $f->email,
                 'research_interests' => $f->research_interests ? explode(',', $f->research_interests) : [],
                 'img' => $f->photo_url,
-
-                // convert expertise string → array
-                'expertise' => $f->expertise
-                    ? explode(',', $f->expertise)
-                    : []
+                'expertise' => $f->expertise ? explode(',', $f->expertise) : [],
+                'educations' => $f->educations->map(fn($e) => [
+                    'degree'     => $e->degree,
+                    'field'      => $e->field,
+                    'university' => $e->university,
+                    'country'    => $e->country,
+                    'year'       => $e->year,
+                ])->toArray(),
             ];
         });
 

@@ -183,7 +183,7 @@
                     </div>
                 </div>
 
-                {{-- ── Card: Quantity & Loan settings ──────────────────── --}}
+                {{-- Card: Quantity & Loan settings --}}
                 <div
                     style="
                         background: white;
@@ -262,7 +262,7 @@
                     </div>
                 </div>
 
-                {{-- ── Card: Image & Visibility ─────────────────────────── --}}
+                {{-- Card: Image & Visibility --}}
                 <div
                     style="
                         background: white;
